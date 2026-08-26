@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NaMoo Cafe — Korean Fusion on Gallery Walk, Tamborine Mountain</title>
+<meta name="description" content="NaMoo Cafe is a Korean-fusion café on Gallery Walk, Tamborine Mountain — good coffee, homemade scones, Korean beef burgers and a warm welcome.">
+
+<!--
+  =====================================================================
+  EDITING THIS FILE
+  =====================================================================
+  Everything lives in one file on purpose, so you can hand it to
+  anyone and it just works. To change things, search for these
+  landmarks (Ctrl/Cmd+F):
+
+  1. "EDIT: BRAND TOKENS"   → colours, fonts (top of the <style> block)
+  2. "EDIT: HOURS"          → opening hours table
+  3. "EDIT: CONTACT"        → address, phone numbers, map link
+  4. "EDIT: MENU"           → dishes and descriptions
+  5. "EDIT: REVIEWS"        → guest quotes
+  6. "EDIT: STORY"          → the about/owners section
+
+  There are no build steps, no external files, and (aside from the
+  optional Google Fonts line below, which fails gracefully) no
+  internet connection required. Open it in any browser to preview,
+  edit the text between tags, save, refresh.
+
+  A note on photography: rather than pull copyrighted photos off
+  Google/Tripadvisor listings (which usually break when hotlinked
+  and aren't ours to reuse), this design uses simple line-art
+  illustrations in the café's own palette instead — a "sketched
+  chalkboard" identity that won't break or look mismatched. If you
+  have your own photos of NaMoo, drop them into an /images folder
+  next to this file and swap any .art-frame div for an <img> tag —
+  search "EDIT: PHOTOS" below for the exact spots.
+  =====================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================================
+   EDIT: BRAND TOKENS — change these and the whole site follows
+   ===================================================================== */
+:root{
+  --oat:        #F1EBDD;   /* page background — warm oat paper       */
+  --oat-deep:   #E7DFCB;   /* card / section background               */
+  --ink:        #262319;   /* body text                               */
+  --ink-soft:   #57503F;   /* secondary text                          */
+  --pine:       #2E3B2A;   /* deep forest green — primary brand colour*/
+  --pine-2:     #4A5C3F;   /* lighter pine, for hovers                */
+  --moss:       #8C9A6E;   /* soft sage — accents, leaves             */
+  --gochugaru:  #B5432B;   /* Korean chilli red — rare, spicy accent  */
+  --clay:       #C98A4B;   /* warm wood clay — secondary accent       */
+  --cream:      #FBF7EE;   /* lightest surface, card fills            */
+  --line:       #D8CEB4;   /* hairlines / borders                     */
+
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body:    "Work Sans", -apple-system, "Segoe UI", sans-serif;
+  --mono:    "Space Mono", "Courier New", monospace;
+
+  --radius-blob: 42% 58% 61% 39% / 45% 40% 60% 55%;
+  --radius-card: 18px;
+  --maxw: 1160px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--oat);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+h1,h2,h3{ font-family:var(--display); font-weight:600; margin:0; color:var(--pine); }
+p{ margin:0; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+.eyebrow{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gochugaru); font-weight:700;
+}
+:focus-visible{ outline:3px solid var(--gochugaru); outline-offset:3px; border-radius:4px; }
+
+/* subtle paper grain, self-contained (no external image) */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5; mix-blend-mode:multiply;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(0,0,0,.025) 0, transparent 40%),
+    radial-gradient(circle at 82% 68%, rgba(0,0,0,.025) 0, transparent 40%);
+}
+
+/* =====================================================================
+   NAV
+   ===================================================================== */
+header.site{
+  position:sticky; top:0; z-index:40;
+  background:rgba(241,235,221,.9); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 28px; max-width:var(--maxw); margin:0 auto;
+}
+.brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+.brand svg{ width:30px; height:30px; flex-shrink:0; }
+.brand-word{ font-family:var(--display); font-weight:600; font-size:19px; color:var(--pine); letter-spacing:.01em; }
+.brand-word span{ color:var(--gochugaru); }
+nav.links{ display:flex; gap:28px; }
+nav.links a{
+  text-decoration:none; font-size:14.5px; color:var(--ink-soft); font-weight:500;
+  padding:6px 2px; border-bottom:2px solid transparent; transition:.2s;
+}
+nav.links a:hover{ color:var(--pine); border-color:var(--gochugaru); }
+.nav-cta{
+  font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:.03em;
+  background:var(--pine); color:var(--cream); padding:9px 16px; border-radius:99px;
+  text-decoration:none; white-space:nowrap;
+}
+.nav-cta:hover{ background:var(--gochugaru); }
+.nav-toggle{ display:none; }
+
+@media (max-width:760px){
+  nav.links{ display:none; }
+  .nav-cta{ padding:8px 13px; font-size:12px; }
+}
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
+.hero{
+  position:relative; overflow:hidden;
+  padding:76px 0 60px;
+}
+.hero .wrap{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;
+}
+.hero h1{
+  font-size:clamp(34px, 5vw, 58px); line-height:1.04; margin:16px 0 20px; letter-spacing:-.01em;
+}
+.hero h1 em{ font-style:italic; color:var(--gochugaru); }
+.hero p.lede{
+  font-size:18px; color:var(--ink-soft); max-width:46ch; margin-bottom:28px;
+}
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px; }
+.btn{
+  font-family:var(--body); font-weight:600; font-size:15px;
+  padding:13px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  transition:.2s transform, .2s background;
+}
+.btn:hover{ transform:translateY(-1px); }
+.btn-solid{ background:var(--pine); color:var(--cream); }
+.btn-solid:hover{ background:var(--pine-2); }
+.btn-outline{ background:transparent; color:var(--pine); border:1.5px solid var(--pine); }
+.btn-outline:hover{ background:var(--pine); color:var(--cream); }
+
+.stat-row{ display:flex; gap:26px; flex-wrap:wrap; }
+.stat{ font-family:var(--mono); font-size:13px; color:var(--ink-soft); }
+.stat b{ color:var(--pine); font-size:15px; }
+
+.hero-art{ position:relative; aspect-ratio:1/1; }
+.hero-art svg{ width:100%; height:100%; }
+
+/* tree draw-in animation */
+.tree-branch{
+  fill:none; stroke:var(--pine); stroke-width:3; stroke-linecap:round;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  animation:draw 2.4s ease forwards;
+}
+.tree-branch.b2{ animation-delay:.15s; stroke:var(--pine-2); }
+.tree-branch.b3{ animation-delay:.3s; stroke:var(--moss); }
+.leaf{ opacity:0; transform-origin:center; animation:pop .5s ease forwards; }
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+@keyframes pop{ from{opacity:0; transform:scale(0);} to{opacity:1; transform:scale(1);} }
+@media (prefers-reduced-motion: reduce){
+  .tree-branch{ stroke-dashoffset:0; animation:none; }
+  .leaf{ opacity:1; animation:none; }
+}
+
+@media (max-width:860px){
+  .hero .wrap{ grid-template-columns:1fr; }
+  .hero-art{ max-width:340px; margin:0 auto; order:-1; }
+  .hero{ text-align:left; padding-top:44px; }
+}
+
+/* =====================================================================
+   SECTION SCAFFOLDING
+   ===================================================================== */
+section{ position:relative; z-index:1; padding:78px 0; }
+.section-head{ max-width:640px; margin-bottom:44px; }
+.section-head h2{ font-size:clamp(28px,3.4vw,40px); margin-top:12px; line-height:1.1; }
+.section-head p{ color:var(--ink-soft); margin-top:14px; font-size:16.5px; }
+.divider{
+  height:1px; max-width:var(--maxw); margin:0 auto;
+  background:linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent);
+}
+
+/* =====================================================================
+   STORY  — EDIT: STORY
+   ===================================================================== */
+.story{ background:var(--oat-deep); }
+.story .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+.story-copy p{ color:var(--ink-soft); font-size:16.5px; margin-bottom:16px; }
+.story-copy p:last-of-type{ margin-bottom:0; }
+/* EDIT: PHOTOS — illustrated frame standing in for a photograph */
+.art-frame{
+  background:var(--cream); border-radius:var(--radius-blob);
+  border:1.5px solid var(--line);
+  aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+  padding:14%;
+}
+.art-frame svg{ width:100%; height:100%; }
+
+/* =====================================================================
+   MENU  — EDIT: MENU
+   ===================================================================== */
+.menu-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.menu-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:var(--radius-card);
+  padding:28px 24px;
+}
+.menu-card-head{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.menu-card-head svg{ width:34px; height:34px; flex-shrink:0; }
+.menu-card-head h3{ font-size:19px; }
+.dish{ padding:14px 0; border-top:1px dashed var(--line); }
+.dish:first-of-type{ border-top:none; padding-top:0; }
+.dish-row{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+.dish-row h4{ font-family:var(--body); font-size:15.5px; font-weight:600; margin:0; }
+.tag{
+  font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--gochugaru); border:1px solid var(--gochugaru); border-radius:99px; padding:2px 8px; white-space:nowrap;
+}
+.dish p{ font-size:14px; color:var(--ink-soft); margin-top:4px; }
+
+.dietary-row{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:30px;
+}
+.chip{
+  font-family:var(--mono); font-size:12px; background:var(--oat-deep); border:1px solid var(--line);
+  padding:7px 14px; border-radius:99px; color:var(--ink-soft);
+}
+.menu-note{ margin-top:22px; font-size:13.5px; color:var(--ink-soft); font-style:italic; }
+
+@media (max-width:900px){ .menu-groups{ grid-template-columns:1fr; } }
+
+/* =====================================================================
+   REVIEWS  — EDIT: REVIEWS
+   ===================================================================== */
+.reviews{ background:var(--pine); color:var(--cream); }
+.reviews .section-head h2, .reviews .eyebrow{ color:var(--cream); }
+.reviews .eyebrow{ color:var(--clay); }
+.reviews .section-head p{ color:#D9DFCE; }
+
+.badge-row{ display:flex; gap:16px; margin-bottom:40px; flex-wrap:wrap; }
+.badge{
+  background:rgba(251,247,238,.08); border:1px solid rgba(251,247,238,.25);
+  border-radius:14px; padding:14px 20px; font-family:var(--mono);
+}
+.badge b{ display:block; font-size:22px; }
+.badge span{ font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; opacity:.75; }
+
+.quote-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.quote-card{
+  background:rgba(251,247,238,.06); border:1px solid rgba(251,247,238,.16);
+  border-radius:var(--radius-card); padding:24px;
+}
+.quote-card p.q{ font-size:15px; line-height:1.5; margin-bottom:16px; }
+.quote-meta{ display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:12px; opacity:.8; }
+.quote-meta .stars{ color:var(--clay); letter-spacing:1px; }
+
+.owner-note{
+  margin-top:28px; padding:22px 24px; border-radius:var(--radius-card);
+  background:rgba(251,247,238,.1); border:1px dashed rgba(251,247,238,.3);
+  font-size:14.5px; max-width:640px;
+}
+.owner-note b{ color:var(--clay); font-family:var(--mono); font-size:12px; letter-spacing:.04em; text-transform:uppercase; display:block; margin-bottom:8px; }
+
+@media (max-width:900px){ .quote-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .quote-grid{ grid-template-columns:1fr; } }
+
+/* =====================================================================
+   VISIT  — EDIT: HOURS / EDIT: CONTACT
+   ===================================================================== */
+.visit .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+.hours-table{ width:100%; border-collapse:collapse; font-size:15.5px; margin-top:18px; }
+.hours-table td{ padding:10px 0; border-top:1px dashed var(--line); }
+.hours-table tr:first-child td{ border-top:none; }
+.hours-table td:first-child{ font-weight:600; color:var(--pine); }
+.hours-table td:last-child{ text-align:right; font-family:var(--mono); font-size:14px; color:var(--ink-soft); }
+.hours-table tr.closed td:last-child{ color:var(--gochugaru); }
+
+.info-block{ margin-top:26px; }
+.info-block h4{ font-family:var(--mono); font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; }
+.info-block p{ font-size:16px; }
+.info-block a.tel{ text-decoration:none; color:var(--pine); font-weight:600; }
+.info-block a.tel:hover{ color:var(--gochugaru); }
+.note-small{ font-size:13px; color:var(--ink-soft); margin-top:6px; font-style:italic; }
+
+.map-card{
+  background:var(--oat-deep); border:1px solid var(--line); border-radius:var(--radius-card);
+  padding:26px; display:flex; flex-direction:column; gap:16px;
+}
+.map-card svg{ width:100%; height:auto; }
+.access-list{ list-style:none; margin:14px 0 0; padding:0; display:grid; gap:10px; }
+.access-list li{ display:flex; gap:10px; font-size:14px; color:var(--ink-soft); align-items:flex-start; }
+.access-list svg{ width:18px; height:18px; flex-shrink:0; margin-top:2px; color:var(--moss); }
+
+@media (max-width:860px){ .visit .wrap{ grid-template-columns:1fr; } }
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+footer{ background:var(--ink); color:#D9D2BE; padding:44px 0 28px; }
+footer .wrap{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; }
+footer .brand-word{ color:#F1EBDD; }
+footer .brand-word span{ color:var(--clay); }
+.foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+.foot-links a{ color:#D9D2BE; text-decoration:none; font-size:14px; }
+.foot-links a:hover{ color:var(--clay); }
+.foot-fine{ font-size:12.5px; opacity:.6; max-width:520px; margin-top:18px; line-height:1.6; }
+.foot-bottom{ max-width:var(--maxw); margin:26px auto 0; padding:0 28px; border-top:1px solid rgba(255,255,255,.1); padding-top:18px; font-size:12px; opacity:.55; font-family:var(--mono); }
+
+/* =====================================================================
+   ON-PAGE EDIT TOOLBAR
+   Lets you click straight onto the page and change text — no code
+   needed. Saved edits are kept in this browser only (localStorage),
+   so they'll still be there next time you open this same file here,
+   but won't follow the file if you email or re-upload it elsewhere.
+   ===================================================================== */
+#editable-content.is-editing{
+  outline:2px dashed var(--gochugaru); outline-offset:6px;
+  cursor:text;
+}
+.editbar{
+  position:fixed; bottom:22px; right:22px; z-index:100;
+  display:flex; gap:10px;
+}
+.edit-btn{
+  font-family:var(--body); font-weight:600; font-size:13.5px;
+  padding:11px 18px; border-radius:99px; border:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+  box-shadow:0 6px 20px rgba(38,35,25,.25);
+  transition:.2s transform;
+}
+.edit-btn:hover{ transform:translateY(-1px); }
+.edit-btn.primary{ background:var(--pine); color:var(--cream); }
+.edit-btn.primary:hover{ background:var(--pine-2); }
+.edit-btn.save{ background:var(--gochugaru); color:var(--cream); }
+.edit-btn.reset{ background:var(--cream); color:var(--ink); border:1.5px solid var(--line); box-shadow:none; }
+.edit-toast{
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(10px);
+  background:var(--ink); color:var(--oat); font-family:var(--mono); font-size:12.5px;
+  padding:10px 18px; border-radius:99px; z-index:101; opacity:0; pointer-events:none;
+  transition:.25s;
+}
+.edit-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+@media (max-width:520px){
+  .editbar{ right:14px; bottom:14px; flex-direction:column; align-items:flex-end; }
+  .edit-btn{ padding:10px 15px; font-size:12.5px; }
+}
+
+</style>
+</head>
+<body id="top">
+
+<header class="site">
+  <div class="nav">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="var(--pine)"/>
+        <path d="M20 30 V17" stroke="var(--cream)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 22 L14 16" stroke="var(--cream)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 19 L26 13" stroke="var(--cream)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="13" cy="14" r="2.4" fill="var(--clay)"/>
+        <circle cx="27" cy="11" r="2.4" fill="var(--gochugaru)"/>
+        <circle cx="20" cy="12" r="2.4" fill="var(--moss)"/>
+      </svg>
+      <span class="brand-word">Na<span>Moo</span> Cafe</span>
+    </a>
+    <nav class="links">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="nav-cta" href="#visit">Get directions</a>
+  </div>
+</header>
+
+<div id="editable-content">
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Gallery Walk · Tamborine Mountain</p>
+        <h1>Korean roots,<br>mountain air —<br><em>NaMoo</em> Cafe.</h1>
+        <p class="lede">A cosy Korean-fusion café tucked into Gallery Walk's tourist strip. Good coffee, homemade scones, and a Korean beef burger the regulars keep coming back for.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#menu">See the menu</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=NaMoo+Cafe+157+Long+Rd+Tamborine+Mountain+QLD+4272" target="_blank" rel="noopener">Get directions</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>4.7★</b> Google, 700+ reviews</div>
+          <div class="stat"><b>4.5★</b> Tripadvisor</div>
+          <div class="stat"><b>Tue–Sun</b> 8:30am–3:30pm</div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 320 320">
+          <ellipse cx="160" cy="300" rx="120" ry="10" fill="var(--oat-deep)"/>
+          <path class="tree-branch b1" d="M160 300 C160 230 160 210 160 160" pathLength="1"/>
+          <path class="tree-branch b2" d="M160 210 C130 190 110 175 78 150" pathLength="1"/>
+          <path class="tree-branch b2" d="M160 190 C190 165 205 150 238 122" pathLength="1"/>
+          <path class="tree-branch b3" d="M160 160 C160 120 160 100 160 60" pathLength="1"/>
+          <path class="tree-branch b3" d="M160 130 C138 108 122 95 96 76" pathLength="1"/>
+          <path class="tree-branch b3" d="M160 110 C182 92 196 82 220 66" pathLength="1"/>
+          <g>
+            <circle class="leaf" style="animation-delay:1.1s" cx="78" cy="150" r="9" fill="var(--moss)"/>
+            <circle class="leaf" style="animation-delay:1.2s" cx="238" cy="122" r="9" fill="var(--clay)"/>
+            <circle class="leaf" style="animation-delay:1.3s" cx="96" cy="76" r="8" fill="var(--gochugaru)"/>
+            <circle class="leaf" style="animation-delay:1.4s" cx="220" cy="66" r="8" fill="var(--moss)"/>
+            <circle class="leaf" style="animation-delay:1.5s" cx="160" cy="60" r="10" fill="var(--pine-2)"/>
+            <circle class="leaf" style="animation-delay:1.6s" cx="140" cy="95" r="6" fill="var(--clay)"/>
+            <circle class="leaf" style="animation-delay:1.7s" cx="184" cy="140" r="6" fill="var(--gochugaru)"/>
+            <circle class="leaf" style="animation-delay:1.8s" cx="115" cy="130" r="6" fill="var(--moss)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ================= STORY — EDIT: STORY ================= -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div>
+        <div class="art-frame" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <path d="M40 150 Q40 60 100 40 Q160 60 160 150 Z" fill="none" stroke="var(--pine)" stroke-width="3"/>
+            <path d="M60 150 C60 100 80 70 100 60 C120 70 140 100 140 150" fill="none" stroke="var(--moss)" stroke-width="2.5"/>
+            <circle cx="100" cy="55" r="6" fill="var(--gochugaru)"/>
+            <circle cx="80" cy="90" r="5" fill="var(--clay)"/>
+            <circle cx="120" cy="90" r="5" fill="var(--clay)"/>
+            <circle cx="70" cy="120" r="4.5" fill="var(--moss)"/>
+            <circle cx="130" cy="120" r="4.5" fill="var(--moss)"/>
+            <rect x="30" y="150" width="140" height="8" rx="4" fill="var(--pine)"/>
+            <text x="100" y="180" text-anchor="middle" font-family="Space Mono, monospace" font-size="12" fill="var(--ink-soft)">나무 · "tree"</text>
+          </svg>
+        </div>
+      </div>
+      <div class="story-copy">
+        <p class="eyebrow">The story</p>
+        <h2>Grown from one small café.</h2>
+        <p>NaMoo Cafe is owned by Young Nam, who grew up in Korea, and his wife. Before Gallery Walk, they ran a café in a touristy corner of South Australia — years of experience they eventually brought up to Tamborine Mountain, where NaMoo has now been part of the Gallery Walk strip for several years.</p>
+        <p>Alongside their team, they built a menu around folding Korean flavours into familiar café classics: a beef burger with a Korean twist, spicy fried chicken and kimchi fried rice sitting comfortably next to homemade scones and Devonshire tea.</p>
+        <p>Namoo (나무) means <em>tree</em> in Korean — a fitting name for a café sitting in the rainforest air of Tamborine Mountain.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ================= MENU — EDIT: MENU ================= -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">On the board</p>
+        <h2>Korean fusion meets the classic café run.</h2>
+        <p>A living menu that shifts with the season — these are the dishes guests mention again and again. Worth asking what's fresh today.</p>
+      </div>
+
+      <div class="menu-groups">
+
+        <div class="menu-card">
+          <div class="menu-card-head">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--gochugaru)" opacity=".12"/><path d="M11 20h18M13 20a7 7 0 0114 0M11 24h18" stroke="var(--gochugaru)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            <h3>Korean Fusion</h3>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Korean Beef Burger</h4><span class="tag">signature</span></div>
+            <p>The dish guests mention most — a beef burger built around Korean-style seasoning.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>K-Style Fried Chicken</h4><span class="tag">spicy</span></div>
+            <p>Korean-style spiced fried chicken with a proper kick.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Kimchi Fried Rice</h4></div>
+            <p>A savoury, kimchi-forward take on fried rice.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Bibimbap</h4></div>
+            <p>The classic mixed rice bowl, café-fied for a Gallery Walk lunch.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-head">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--clay)" opacity=".18"/><path d="M12 18h16v6a8 8 0 01-16 0z" fill="none" stroke="var(--clay)" stroke-width="2"/><path d="M28 19h3a3 3 0 010 6h-3" fill="none" stroke="var(--clay)" stroke-width="2"/></svg>
+            <h3>Café Classics</h3>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Homemade Scones</h4><span class="tag">house-made</span></div>
+            <p>Warm, buttery and fluffy, served with jam and cream — the owners' own favourite.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Avocado on Sourdough</h4></div>
+            <p>With scrambled eggs — a regular pick for late breakfast.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Bacon &amp; Eggs / BLT</h4></div>
+            <p>Straightforward, done well, tender bacon.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Beef Nachos</h4></div>
+            <p>A guest favourite, generously portioned.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Devonshire Tea</h4></div>
+            <p>Fresh scones, jam and cream, nicely presented.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Halloumi / Teriyaki Chicken Salad</h4></div>
+            <p>The lighter side of the menu.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-head">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--pine)" opacity=".12"/><path d="M14 17h12v7a6 6 0 01-12 0z" fill="none" stroke="var(--pine)" stroke-width="2"/><path d="M17 13c0 1.5 1.5 1.5 1.5 3M22 13c0 1.5 1.5 1.5 1.5 3" stroke="var(--pine)" stroke-width="2" stroke-linecap="round"/></svg>
+            <h3>Coffee &amp; Drinks</h3>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Espresso Coffee</h4><span class="tag">house specialty</span></div>
+            <p>Young Nam's own bar — regularly the most-praised thing on the table.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Matcha Latte</h4></div>
+            <p>Rich and well-balanced.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Mango Strawberry &amp; Lychee Smoothies</h4></div>
+            <p>Bright, fruity, popular in the warmer months.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><h4>Milkshakes</h4></div>
+            <p>Chocolate is the one to beat.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dietary-row">
+        <span class="chip">Vegetarian options</span>
+        <span class="chip">Gluten-free bread &amp; cheesecake</span>
+        <span class="chip">Ask staff re: allergy handling</span>
+        <span class="chip">Dine-in &amp; takeaway</span>
+      </div>
+      <p class="menu-note">Dishes and prices shift with the season and with what's fresh — treat this as a highlight reel, not a fixed printed menu.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ================= REVIEWS — EDIT: REVIEWS ================= -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Word on Gallery Walk</p>
+        <h2>What regulars keep saying.</h2>
+        <p>A few notes pulled from guests, in their own words — kept short and true to what they said.</p>
+      </div>
+
+      <div class="badge-row">
+        <div class="badge"><b>4.7 / 5</b><span>Google · 700+ reviews</span></div>
+        <div class="badge"><b>4.5 / 5</b><span>Tripadvisor · ~29 reviews</span></div>
+        <div class="badge"><b>4.8 / 5</b><span>Restaurant Guru</span></div>
+      </div>
+
+      <div class="quote-grid">
+        <div class="quote-card">
+          <p class="q">"My go-to lunch spot after a hike into town — the matcha latte is rich, and the bacon is genuinely tender."</p>
+          <div class="quote-meta"><span>yangshu zang</span><span class="stars">★★★★★</span></div>
+        </div>
+        <div class="quote-card">
+          <p class="q">"A cute little place on Gallery Walk — the nachos were a 10/10 and the lychee drink matched them."</p>
+          <div class="quote-meta"><span>The Gollys</span><span class="stars">★★★★★</span></div>
+        </div>
+        <div class="quote-card">
+          <p class="q">"A hidden gem — cosy and welcoming, with beautifully made coffee and staff who are warm without hovering."</p>
+          <div class="quote-meta"><span>Jing Yang</span><span class="stars">★★★★★</span></div>
+        </div>
+        <div class="quote-card">
+          <p class="q">"The avocado on sourdough was fresh and full of flavour, with scrambled eggs that tasted divine."</p>
+          <div class="quote-meta"><span>Sooty</span><span class="stars">★★★★★</span></div>
+        </div>
+        <div class="quote-card">
+          <p class="q">"Small, family-run and cosy — great beef nachos, and scones with crispy tops straight from the oven."</p>
+          <div class="quote-meta"><span>Marion Newman</span><span class="stars">★★★★★</span></div>
+        </div>
+        <div class="quote-card">
+          <p class="q">"Warm and friendly from the moment you walk in — the scones are buttery, fluffy, and worth the trip alone."</p>
+          <div class="quote-meta"><span>Dawn Tan</span><span class="stars">★★★★★</span></div>
+        </div>
+      </div>
+
+      <div class="owner-note">
+        <b>From the NaMoo team</b>
+        When a guest left a five-star note about the nachos, the owners replied themselves — thanking her for stopping by and for the kind words. That's the tone of the place: small enough that the people behind the counter are the ones saying thank you.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ================= VISIT — EDIT: HOURS / EDIT: CONTACT ================= -->
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Visit</p>
+        <h2 style="font-size:clamp(26px,3vw,34px); margin:12px 0 6px;">Find the tree on Gallery Walk.</h2>
+
+        <table class="hours-table">
+          <tr class="closed"><td>Monday</td><td>Closed</td></tr>
+          <tr><td>Tuesday</td><td>8:30am – 3:30pm</td></tr>
+          <tr><td>Wednesday</td><td>8:30am – 3:30pm</td></tr>
+          <tr><td>Thursday</td><td>8:30am – 3:30pm</td></tr>
+          <tr><td>Friday</td><td>8:30am – 3:30pm</td></tr>
+          <tr><td>Saturday</td><td>8:30am – 3:30pm</td></tr>
+          <tr><td>Sunday</td><td>8:30am – 3:30pm</td></tr>
+        </table>
+        <p class="note-small">Hours can shift with the season and reported times vary by source — a quick call ahead is worth it, especially on public holidays.</p>
+
+        <div class="info-block">
+          <h4>Address</h4>
+          <p>157 Long Rd, Tamborine Mountain QLD 4272<br>Gallery Walk — next to Franquette Bakery</p>
+        </div>
+
+        <div class="info-block">
+          <h4>Phone</h4>
+          <p><a class="tel" href="tel:+61431108601">+61 431 108 601</a></p>
+          <p><a class="tel" href="tel:+61415223352">+61 415 223 352</a></p>
+          <p class="note-small">Two numbers appear across different listings — worth confirming which is current when you call.</p>
+        </div>
+
+        <div class="info-block">
+          <h4>Parking</h4>
+          <p class="note-small" style="font-style:normal; font-size:14.5px; color:var(--ink);">Mostly roadside along Gallery Walk. NaMoo sits toward the end of the strip, which tends to mean a shorter walk from a park than the busier middle section.</p>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <svg viewBox="0 0 280 200" aria-hidden="true">
+          <path d="M0 150 Q40 110 90 130 T180 100 T280 130 V200 H0 Z" fill="var(--pine)" opacity=".14"/>
+          <path d="M0 165 Q50 130 100 150 T200 120 T280 150 V200 H0 Z" fill="var(--moss)" opacity=".22"/>
+          <circle cx="150" cy="95" r="7" fill="var(--gochugaru)"/>
+          <path d="M150 95 v-18" stroke="var(--gochugaru)" stroke-width="3" stroke-linecap="round"/>
+          <text x="150" y="122" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" fill="var(--ink-soft)">Gallery Walk</text>
+        </svg>
+        <a class="btn btn-solid" style="justify-content:center" href="https://www.google.com/maps/search/?api=1&query=NaMoo+Cafe+157+Long+Rd+Tamborine+Mountain+QLD+4272" target="_blank" rel="noopener">Open in Google Maps</a>
+
+        <ul class="access-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Indoor &amp; outdoor seating, mountain views</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Wheelchair-accessible parking, entrance, seating &amp; restroom</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Reservations accepted; card &amp; NFC payments</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Good for solo dining, laptop work &amp; families</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="brand-word">Na<span>Moo</span> Cafe</span>
+      <p class="foot-fine">Korean fusion café on Gallery Walk, Tamborine Mountain. Information gathered from public listings and guest reviews — hours, menu and phone details can change, so it's always worth confirming directly with the café before you visit.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Story</a>
+      <a href="#reviews">Reviews</a>
+      <a href="tel:+61431108601">Call</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=NaMoo+Cafe+157+Long+Rd+Tamborine+Mountain+QLD+4272" target="_blank" rel="noopener">Directions</a>
+    </div>
+  </div>
+  <div class="foot-bottom">157 Long Rd, Tamborine Mountain QLD 4272 · 나무 means "tree"</div>
+</footer>
+</div><!-- /#editable-content -->
+
+<div class="editbar">
+  <button id="editToggleBtn" class="edit-btn primary" type="button">✎ Edit page</button>
+  <button id="editSaveBtn" class="edit-btn save" type="button" style="display:none;">💾 Save changes</button>
+  <button id="editResetBtn" class="edit-btn reset" type="button" style="display:none;">↺ Cancel</button>
+</div>
+<div class="edit-toast" id="editToast">Saved</div>
+
+<script>
+(function(){
+  var KEY = 'namoo_cafe_edits_v1';
+  var root = document.getElementById('editable-content');
+  var toggleBtn = document.getElementById('editToggleBtn');
+  var saveBtn = document.getElementById('editSaveBtn');
+  var resetBtn = document.getElementById('editResetBtn');
+  var toast = document.getElementById('editToast');
+  var beforeEdit = null;
+
+  // Restore any previously saved edits (kept in this browser only).
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.innerHTML = saved;
+  } catch(e) {}
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 1800);
+  }
+
+  function setEditing(on){
+    root.setAttribute('contenteditable', on ? 'true' : 'false');
+    root.classList.toggle('is-editing', on);
+    toggleBtn.style.display = on ? 'none' : 'inline-flex';
+    saveBtn.style.display = on ? 'inline-flex' : 'none';
+    resetBtn.style.display = on ? 'inline-flex' : 'none';
+  }
+
+  toggleBtn.addEventListener('click', function(){
+    beforeEdit = root.innerHTML;
+    setEditing(true);
+    showToast('Click any text on the page to edit it');
+  });
+
+  saveBtn.addEventListener('click', function(){
+    try {
+      localStorage.setItem(KEY, root.innerHTML);
+      showToast('Saved — changes will still be here next time you open this file in this browser');
+    } catch(e) {
+      showToast('Could not save in this browser, but the page will keep your edits until you reload');
+    }
+    setEditing(false);
+  });
+
+  resetBtn.addEventListener('click', function(){
+    if (beforeEdit !== null) root.innerHTML = beforeEdit;
+    setEditing(false);
+  });
+})();
+</script>
+
+</body>
+</html>
