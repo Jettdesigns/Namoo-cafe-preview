@@ -1,454 +1,576 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MR BRIX - Opening Screen &amp; Homepage</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "secondary-fixed-dim": "#efc200",
-                        "on-secondary-container": "#715b00",
-                        "outline-variant": "#5e3f3a",
-                        "on-tertiary-container": "#f6f6ff",
-                        "error-container": "#93000a",
-                        "surface-container": "#1e2020",
-                        "secondary-fixed": "#ffe084",
-                        "surface": "#121414",
-                        "on-background": "#e2e2e2",
-                        "surface-container-high": "#282a2b",
-                        "tertiary-fixed-dim": "#afc6ff",
-                        "inverse-surface": "#e2e2e2",
-                        "on-primary-container": "#fff4f2",
-                        "tertiary": "#afc6ff",
-                        "on-surface": "#e2e2e2",
-                        "on-primary-fixed": "#410001",
-                        "surface-container-low": "#1a1c1c",
-                        "on-tertiary-fixed": "#001943",
-                        "surface-bright": "#37393a",
-                        "primary-container": "#e3000b",
-                        "on-primary-fixed-variant": "#930004",
-                        "on-primary": "#690002",
-                        "inverse-on-surface": "#2f3131",
-                        "surface-tint": "#ffb4a9",
-                        "primary-fixed": "#ffdad5",
-                        "tertiary-fixed": "#d9e2ff",
-                        "secondary-container": "#ffd336",
-                        "on-tertiary": "#002d6c",
-                        "surface-container-lowest": "#0c0f0f",
-                        "error": "#ffb4ab",
-                        "on-tertiary-fixed-variant": "#004298",
-                        "primary-fixed-dim": "#ffb4a9",
-                        "on-secondary-fixed": "#231b00",
-                        "on-error-container": "#ffdad6",
-                        "surface-container-highest": "#333535",
-                        "on-surface-variant": "#e9bcb6",
-                        "on-error": "#690005",
-                        "background": "#121414",
-                        "surface-variant": "#333535",
-                        "outline": "#af8781",
-                        "primary": "#ffb4a9",
-                        "surface-dim": "#121414",
-                        "tertiary-container": "#306dd7",
-                        "on-secondary": "#3c2f00",
-                        "on-secondary-fixed-variant": "#574500",
-                        "inverse-primary": "#c00007",
-                        "secondary": "#fff3d7"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.125rem",
-                        lg: "0.25rem",
-                        xl: "0.5rem",
-                        full: "0.75rem"
-                    },
-                    spacing: {
-                        "margin-mobile": "16px",
-                        "brick-md": "32px",
-                        "unit": "8px",
-                        "margin-desktop": "48px",
-                        "brick-lg": "64px",
-                        "gutter": "24px",
-                        "brick-sm": "16px"
-                    },
-                    fontFamily: {
-                        "headline-lg-mobile": ["Bricolage Grotesque"],
-                        "body-lg": ["Space Grotesk"],
-                        "body-md": ["Space Grotesk"],
-                        "display-lg": ["Bricolage Grotesque"],
-                        "headline-lg": ["Bricolage Grotesque"],
-                        "label-caps": ["Space Mono"],
-                        "headline-md": ["Bricolage Grotesque"]
-                    },
-                    fontSize: {
-                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "800" }],
-                        "body-lg": ["20px", { lineHeight: "1.5", fontWeight: "500" }],
-                        "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
-                        "display-lg": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "800" }],
-                        "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800" }],
-                        "label-caps": ["14px", { lineHeight: "1", fontWeight: "700" }],
-                        "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "700" }]
-                    }
-                }
-            }
-        }
-    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MR BRIX — Tamborine Mountain</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800;12..96,900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
-        .mario-text-shadow {
-            text-shadow:
-                -2px -2px 0 #deb887,
-                2px -2px 0 #deb887,
-                -2px 2px 0 #8b4513,
-                2px 2px 0 #8b4513,
-                0px 8px 0px #8b4513,
-                0px 12px 10px rgba(0,0,0,0.8);
-            transform: perspective(500px) rotateX(10deg);
-        }
+    :root{
+      --yellow:#ffdd00;
+      --yellow-deep:#f2c400;
+      --black:#0b0b0c;
+      --black-soft:#17171a;
+      --black-card:#111113;
+      --cream:#fff8dc;
+      --line:#000;
+      font-size:16px;
+    }
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; padding:0;
+      font-family:'Space Grotesk', Arial, sans-serif;
+      background:var(--black);
+      color:var(--cream);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    h1,h2,h3{ font-family:'Bricolage Grotesque', Georgia, serif; margin:0; }
+    p{ margin:0; }
+    button{ font-family:inherit; cursor:pointer; }
+    a{ color:inherit; text-decoration:none; }
+    .caps{ font-family:'Space Mono', monospace; letter-spacing:.08em; text-transform:uppercase; }
 
-        .drop-in {
-            animation: dropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, float 3s ease-in-out infinite;
-            opacity: 0;
-            transform: translateY(-50px) scale(0.5);
-            display: inline-block;
-        }
+    /* ============ SPLASH SCREEN ============ */
+    #splash-screen{
+      position:fixed; inset:0; z-index:100;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background:#000; overflow:hidden; width:100%; height:100%;
+    }
+    .splash-shader-layer{ position:absolute; inset:0; width:100%; height:100%; opacity:.6; pointer-events:none; }
+    .splash-shader-layer canvas{ display:block; width:100%; height:100%; }
 
-        @keyframes dropIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+    .mario-text-shadow{
+        text-shadow:
+            -2px -2px 0 #deb887, 2px -2px 0 #deb887,
+            -2px 2px 0 #8b4513, 2px 2px 0 #8b4513,
+            0px 8px 0px #8b4513, 0px 12px 10px rgba(0,0,0,0.8);
+        transform: perspective(500px) rotateX(10deg);
+    }
+    .drop-in{
+        animation: dropIn 0.8s cubic-bezier(0.175,0.885,0.32,1.275) forwards, float 3s ease-in-out infinite;
+        opacity:0; transform:translateY(-50px) scale(0.5); display:inline-block;
+    }
+    @keyframes dropIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-5px);} }
+    .letter-m{ animation-delay:.1s,.9s; color:#4169e1; }
+    .letter-r1{ animation-delay:.3s,1.1s; color:#ff0000; }
+    .letter-b{ animation-delay:.5s,1.3s; color:#ffff00; }
+    .letter-r2{ animation-delay:.7s,1.5s; color:#00ff00; }
+    .letter-i{ animation-delay:.9s,1.7s; color:#ff0000; }
+    .letter-x{ animation-delay:1.1s,1.9s; color:#00ced1; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+    .slide-up{ animation: slideUp .9s cubic-bezier(0.6,0,0.8,0.2) forwards; }
+    @keyframes slideUp{ to{ transform:translateY(-100%);} }
 
-        .letter-m { animation-delay: 0.1s, 0.9s; color: #4169e1; } /* Blue */
-        .letter-r1 { animation-delay: 0.3s, 1.1s; color: #ff0000; } /* Red */
-        .letter-b { animation-delay: 0.5s, 1.3s; color: #ffff00; } /* Yellow */
-        .letter-r2 { animation-delay: 0.7s, 1.5s; color: #00ff00; } /* Green */
-        .letter-i { animation-delay: 0.9s, 1.7s; color: #ff0000; } /* Red */
-        .letter-x { animation-delay: 1.1s, 1.9s; color: #00ced1; } /* Blue/Green */
+    .logo-row{
+      font-family:'Bricolage Grotesque', Georgia, serif;
+      font-weight:800; text-transform:uppercase;
+      font-size:68px; line-height:1.1; letter-spacing:-0.02em;
+      display:flex; align-items:center; justify-content:center;
+      gap:4px; margin-bottom:24px; flex-wrap:nowrap;
+    }
+    .logo-row .gap{ width:14px; }
+    @media(min-width:640px){ .logo-row{ font-size:120px; gap:8px; } .logo-row .gap{ width:28px; } }
+    @media(min-width:900px){ .logo-row{ font-size:180px; gap:14px; } .logo-row .gap{ width:40px; } }
+    @media(min-width:1200px){ .logo-row{ font-size:220px; } }
 
-        .slide-up {
-            animation: slideUp 0.9s cubic-bezier(0.6, 0, 0.8, 0.2) forwards;
-        }
+    .pawn-wrap{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+    .pawn-glow-bg{
+      position:absolute; width:85vw; height:85vw; max-width:720px; max-height:720px; border-radius:50%;
+      opacity:.7; filter:blur(40px);
+      background:radial-gradient(circle, rgba(255,47,208,.22), rgba(0,245,255,.14) 40%, transparent 70%);
+    }
+    .pawn-svg{ position:relative; width:62vw; max-width:480px; height:auto; }
+    @media(min-width:640px){ .pawn-svg{ width:46vw; } }
+    @media(min-width:900px){ .pawn-svg{ width:34vw; } }
+    .pawn-glow-pulse{ animation: pawnGlow 3.2s ease-in-out infinite; }
+    @keyframes pawnGlow{
+        0%,100%{ filter:drop-shadow(0 0 35px rgba(16,185,129,.55)) drop-shadow(0 0 70px rgba(16,185,129,.25)); }
+        50%{ filter:drop-shadow(0 0 60px rgba(16,185,129,.9)) drop-shadow(0 0 110px rgba(16,185,129,.4)); }
+    }
 
-        @keyframes slideUp {
-            to {
-                transform: translateY(-100%);
-            }
-        }
+    .splash-center{ position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; width:100%; padding:0 16px; text-align:center; }
+    .tagline-gradient{
+        background:linear-gradient(90deg,#00f5ff,#ff2fd0,#ffd336,#39ff88,#00f5ff);
+        background-size:300% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+        animation:taglineShift 5s linear infinite;
+        font-family:'Bricolage Grotesque',Georgia,serif; font-weight:700; text-transform:uppercase;
+        font-size:22px; letter-spacing:.03em;
+    }
+    @media(min-width:640px){ .tagline-gradient{ font-size:32px; } }
+    @media(min-width:900px){ .tagline-gradient{ font-size:38px; } }
+    @keyframes taglineShift{ to{ background-position:300% center; } }
 
-        .brick-border {
-            border: 2px solid;
-            border-top-color: rgba(255,255,255,0.2);
-            border-left-color: rgba(255,255,255,0.2);
-            border-bottom-color: rgba(0,0,0,0.5);
-            border-right-color: rgba(0,0,0,0.5);
-        }
+    .splash-bottom{ position:absolute; bottom:40px; z-index:10; display:flex; flex-direction:column; align-items:center; gap:24px; padding:0 16px; }
+    @media(min-width:640px){ .splash-bottom{ bottom:56px; } }
 
-        .stud-pattern {
-            background-image: radial-gradient(circle, rgba(0,0,0,0.1) 2px, transparent 2px);
-            background-size: 8px 8px;
-        }
+    .btn-press-start{
+        background:linear-gradient(135deg,#ffd336 0%,#ff8a00 55%,#ff2fd0 100%);
+        border:3px solid #0c0f0f; color:#1a0f00; text-shadow:0px 1px 0px rgba(255,255,255,.3);
+        animation: startPulse 1.5s ease-in-out infinite;
+        font-family:'Space Mono',monospace; font-weight:700; text-transform:uppercase; letter-spacing:.15em;
+        font-size:18px; padding:18px 40px; border-radius:4px;
+    }
+    @media(min-width:768px){ .btn-press-start{ font-size:22px; padding:22px 52px; } }
+    .btn-press-start:active{ transform:translate(3px,3px) scale(.98) !important; }
+    @keyframes startPulse{
+        0%,100%{ box-shadow:6px 6px 0px 0px rgba(0,0,0,1), 0 0 22px 4px rgba(57,255,136,.55); transform:scale(1); }
+        50%{ box-shadow:6px 6px 0px 0px rgba(0,0,0,1), 0 0 38px 10px rgba(255,47,208,.65); transform:scale(1.035); }
+    }
+    .copyright-glow{
+        text-shadow:0 0 8px rgba(0,245,255,.8), 0 0 18px rgba(0,245,255,.4), 1px 1px 2px rgba(0,0,0,.9);
+        color:#00f5ff; font-family:'Space Mono',monospace; font-size:20px;
+    }
+    @media(min-width:768px){ .copyright-glow{ font-size:26px; } }
 
-        .btn-primary {
-            background-color: theme('colors.primary-container');
-            border-bottom: 4px solid theme('colors.on-primary-fixed-variant');
-            color: theme('colors.on-primary-container');
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
-            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
-        }
-        .btn-primary:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
-        }
+    /* ============ MAIN HOMEPAGE ============ */
+    #main-content{ display:none; opacity:0; transition:opacity .5s ease; min-height:100vh; background:var(--black); }
 
-        /* --- Massive dark-green chess pawn --- */
-        .pawn-glow-pulse {
-            animation: pawnGlow 3.2s ease-in-out infinite;
-        }
-        @keyframes pawnGlow {
-            0%, 100% { filter: drop-shadow(0 0 35px rgba(16,185,129,0.55)) drop-shadow(0 0 70px rgba(16,185,129,0.25)); }
-            50% { filter: drop-shadow(0 0 60px rgba(16,185,129,0.9)) drop-shadow(0 0 110px rgba(16,185,129,0.4)); }
-        }
+    .stud-pattern{ background-image:radial-gradient(circle, rgba(0,0,0,.35) 3px, transparent 3px); background-size:16px 16px; }
+    .checker-pattern{ background-image:
+        linear-gradient(45deg,#000 25%,transparent 25%,transparent 75%,#000 75%,#000),
+        linear-gradient(45deg,#000 25%,transparent 25%,transparent 75%,#000 75%,#000);
+        background-size:36px 36px; background-position:0 0,18px 18px; background-color:#f4f0e2; }
 
-        /* --- Vibrant animated tagline --- */
-        .tagline-gradient {
-            background: linear-gradient(90deg, #00f5ff, #ff2fd0, #ffd336, #39ff88, #00f5ff);
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: taglineShift 5s linear infinite;
-        }
-        @keyframes taglineShift {
-            to { background-position: 300% center; }
-        }
+    /* --- Nav --- */
+    .site-nav{ position:sticky; top:0; z-index:50; background:var(--black); border-bottom:4px solid var(--yellow); transition:padding .25s ease, box-shadow .25s ease; }
+    .site-nav.scrolled{ box-shadow:0 6px 0 0 rgba(0,0,0,.4); }
+    .nav-inner{ max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:18px 20px; }
+    .site-nav.scrolled .nav-inner{ padding:10px 20px; }
+    .nav-logo{ font-family:'Bricolage Grotesque',Georgia,serif; font-weight:800; font-size:22px; color:var(--yellow); letter-spacing:-0.01em; text-transform:uppercase; }
+    .nav-cta{ background:var(--yellow); color:var(--black); border:3px solid var(--black); font-weight:700; padding:10px 20px; border-radius:3px; box-shadow:4px 4px 0 0 #000; font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:13px; transition:transform .15s ease, box-shadow .15s ease; }
+    .nav-cta:hover{ transform:translate(2px,2px); box-shadow:2px 2px 0 0 #000; }
 
-        /* --- Press to Start button --- */
-        .btn-press-start {
-            background: linear-gradient(135deg, #ffd336 0%, #ff8a00 55%, #ff2fd0 100%);
-            border: 3px solid #0c0f0f;
-            color: #1a0f00;
-            text-shadow: 0px 1px 0px rgba(255,255,255,0.3);
-            animation: startPulse 1.5s ease-in-out infinite;
-        }
-        .btn-press-start:active {
-            transform: translate(3px, 3px) scale(0.98) !important;
-        }
-        @keyframes startPulse {
-            0%, 100% {
-                box-shadow: 6px 6px 0px 0px rgba(0,0,0,1), 0 0 22px 4px rgba(57,255,136,0.55);
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 6px 6px 0px 0px rgba(0,0,0,1), 0 0 38px 10px rgba(255,47,208,0.65);
-                transform: scale(1.035);
-            }
-        }
+    /* --- Hero --- */
+    .hero{ position:relative; overflow:hidden; padding:90px 20px 70px; text-align:center;
+      background:repeating-linear-gradient(135deg, var(--black) 0 26px, var(--black-soft) 26px 52px); }
+    .hero-shape{ position:absolute; border-radius:50%; opacity:.5; filter:blur(2px); pointer-events:none; }
+    .shape-a{ width:260px; height:260px; background:var(--yellow); top:-90px; left:-90px; opacity:.18; }
+    .shape-b{ width:180px; height:180px; background:#ff2fd0; bottom:-60px; right:-40px; opacity:.14; }
+    .hero-inner{ position:relative; z-index:2; max-width:820px; margin:0 auto; }
+    .hero-kicker{ display:inline-block; background:var(--yellow); color:var(--black); font-family:'Space Mono',monospace; font-weight:700; font-size:12px; letter-spacing:.14em; text-transform:uppercase; padding:8px 16px; border-radius:999px; border:2px solid #000; margin-bottom:22px; }
+    .hero h1{ font-size:44px; line-height:1.05; text-transform:uppercase; color:var(--yellow); letter-spacing:-0.02em; text-shadow:3px 3px 0 #000, 6px 6px 0 rgba(255,221,0,.25); margin-bottom:20px; }
+    @media(min-width:640px){ .hero h1{ font-size:64px; } }
+    @media(min-width:900px){ .hero h1{ font-size:84px; } }
+    .hero p.lead{ font-size:17px; line-height:1.65; color:#f4efe0; max-width:640px; margin:0 auto 34px; }
+    @media(min-width:640px){ .hero p.lead{ font-size:20px; } }
+    .hero-ctas{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-bottom:44px; }
+    .btn-solid{ background:var(--yellow); color:var(--black); border:3px solid #000; font-weight:700; padding:16px 30px; border-radius:4px; box-shadow:6px 6px 0 0 #000; font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:14px; transition:transform .15s ease, box-shadow .15s ease; }
+    .btn-solid:hover{ transform:translate(3px,3px); box-shadow:3px 3px 0 0 #000; }
+    .btn-outline{ background:transparent; color:var(--yellow); border:3px solid var(--yellow); font-weight:700; padding:16px 30px; border-radius:4px; font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:14px; transition:background .2s ease, color .2s ease; }
+    .btn-outline:hover{ background:var(--yellow); color:#000; }
 
-        .copyright-glow {
-            text-shadow: 0 0 8px rgba(0,245,255,0.8), 0 0 18px rgba(0,245,255,0.4), 1px 1px 2px rgba(0,0,0,0.9);
-        }
-    </style>
+    .facts-row{ display:flex; flex-wrap:wrap; gap:14px 30px; justify-content:center; font-family:'Space Mono',monospace; font-size:13px; color:#c9c4b0; text-transform:uppercase; letter-spacing:.05em; }
+    .facts-row span{ white-space:nowrap; }
+    .facts-row strong{ color:var(--yellow); }
+
+    /* --- Marquee --- */
+    .marquee-band{ position:relative; background:var(--yellow); border-top:4px solid #000; border-bottom:4px solid #000; overflow:hidden; padding:14px 0; }
+    .marquee-track{ display:flex; width:max-content; animation:marqueeScroll 22s linear infinite; }
+    .marquee-track span{ font-family:'Space Mono',monospace; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.08em; color:#000; padding:0 26px; white-space:nowrap; }
+    .marquee-track span::after{ content:'★'; margin-left:26px; color:#000; }
+    @keyframes marqueeScroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+
+    /* --- Brands section --- */
+    .brands-section{ background:var(--cream); color:#161208; padding:80px 20px 100px; }
+    .brands-head{ max-width:760px; margin:0 auto 50px; text-align:center; }
+    .brands-head .caps-tag{ font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.14em; color:#b8280f; text-transform:uppercase; }
+    .brands-head h2{ font-size:36px; text-transform:uppercase; color:#0b0b0c; margin:12px 0 16px; letter-spacing:-0.01em; }
+    @media(min-width:640px){ .brands-head h2{ font-size:52px; } }
+    .brands-head p{ font-size:17px; line-height:1.6; color:#4a4436; }
+
+    .brand-grid{ max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:26px; }
+    @media(min-width:640px){ .brand-grid{ grid-template-columns:1fr 1fr; } }
+    @media(min-width:1024px){ .brand-grid{ grid-template-columns:repeat(4,1fr); } }
+
+    .brand-card{
+      position:relative; border-radius:14px; border:4px solid #000; overflow:hidden; cursor:pointer;
+      min-height:230px; padding:22px; display:flex; flex-direction:column; justify-content:flex-end;
+      box-shadow:8px 8px 0 0 #000; opacity:0; transform:translateY(46px) rotate(-2deg);
+      transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.3,1.2), box-shadow .2s ease;
+    }
+    .brand-card.revealed{ opacity:1; transform:translateY(0) rotate(0deg); }
+    .brand-card:hover{ box-shadow:4px 4px 0 0 #000; }
+    .brand-card:focus-visible{ outline:4px solid #000; outline-offset:3px; }
+    .brand-card .card-icon{ font-size:44px; line-height:1; margin-bottom:auto; align-self:flex-start; filter:drop-shadow(2px 2px 0 rgba(0,0,0,.5)); }
+    .brand-card h3{ font-size:24px; text-transform:uppercase; letter-spacing:-0.01em; margin-bottom:4px; }
+    .brand-card .card-tag{ font-family:'Space Mono',monospace; font-size:12px; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; opacity:.85; margin-top:2px; margin-bottom:14px; }
+    .card-more-btn{ align-self:flex-start; background:#000; color:#fff; border:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:9px 16px; border-radius:999px; transition:background .2s ease, color .2s ease; }
+    .brand-card:hover .card-more-btn{ background:var(--yellow); color:#000; }
+
+    .card-pokemon{ background:linear-gradient(160deg,#ffcb05 0%,#ee1c25 65%,#8f0f14 100%); color:#fff; }
+    .card-mtg{ background:linear-gradient(120deg,#f8f4e3 0 20%, #0e6ba8 20% 40%, #150b28 40% 60%, #a3170a 60% 80%, #1c5c34 80% 100%); color:#fff; text-shadow:1px 1px 3px rgba(0,0,0,.7); }
+    .card-yugioh{ background:radial-gradient(circle at 30% 20%, #3a1466 0%, #180a2e 55%, #050208 100%); color:#ffd766; }
+    .card-dnd{ background:linear-gradient(160deg,#7a1414 0%,#3d0a0a 70%,#1a0404 100%); color:#ffe1b3; }
+    .card-chess{ background:linear-gradient(45deg,#000 25%,transparent 25%,transparent 75%,#000 75%,#000),
+        linear-gradient(45deg,#000 25%,transparent 25%,transparent 75%,#000 75%,#000); background-size:30px 30px; background-position:0 0,15px 15px; background-color:#eee7d6; color:#fff; }
+    .card-chess h3, .card-chess .card-tag{ text-shadow:2px 2px 0 #000, -1px -1px 0 #000; }
+    .card-lego{ background:linear-gradient(135deg,#e3000b 0 25%, #ffd336 25% 50%, #306dd7 50% 75%, #2f9e44 75% 100%); color:#0b0b0c; text-shadow:1px 1px 0 rgba(255,255,255,.5); }
+    .card-lego .card-icon, .card-lego h3, .card-lego .card-tag{ color:#0b0b0c; }
+    .card-funko{ background:radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 2px), linear-gradient(135deg,#ff2fd0,#ff8a00 45%,#00c2ff 100%); background-size:18px 18px, cover; color:#0b0b0c; }
+    .card-boardgames{ background:linear-gradient(160deg,#c47f2c 0%,#8a5322 60%,#4d2c0f 100%); color:#fff3d7; }
+
+    /* --- Community strip --- */
+    .community-strip{ background:var(--black); border-top:4px solid var(--yellow); padding:60px 20px; text-align:center; }
+    .community-strip h2{ color:var(--yellow); font-size:30px; text-transform:uppercase; margin-bottom:14px; }
+    @media(min-width:640px){ .community-strip h2{ font-size:40px; } }
+    .community-strip p{ color:#d8d3bf; max-width:640px; margin:0 auto; font-size:16px; line-height:1.6; }
+
+    /* --- Footer --- */
+    .site-footer{ background:#000; border-top:6px solid var(--yellow); padding:46px 20px 30px; }
+    .footer-inner{ max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between; }
+    .footer-brand{ font-family:'Bricolage Grotesque',Georgia,serif; font-weight:800; font-size:26px; color:var(--yellow); text-transform:uppercase; margin-bottom:10px; }
+    .footer-col p, .footer-col a{ font-family:'Space Mono',monospace; font-size:13px; color:#bdb89f; line-height:1.9; display:block; }
+    .footer-col a:hover{ color:var(--yellow); }
+    .footer-bottom{ max-width:1200px; margin:30px auto 0; padding-top:20px; border-top:1px solid #2a2a2a; font-family:'Space Mono',monospace; font-size:11px; color:#8a8570; text-transform:uppercase; letter-spacing:.05em; }
+
+    /* --- Modal --- */
+    .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:200; display:none; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay.open{ display:flex; }
+    .modal-box{ background:var(--cream); color:#161208; max-width:460px; width:100%; border-radius:14px; border:4px solid #000; box-shadow:10px 10px 0 0 #000; overflow:hidden; transform:scale(.9); opacity:0; transition:transform .25s ease, opacity .25s ease; }
+    .modal-overlay.open .modal-box{ transform:scale(1); opacity:1; }
+    .modal-head{ padding:26px 26px 18px; position:relative; }
+    .modal-head .modal-icon{ font-size:46px; display:block; margin-bottom:10px; }
+    .modal-head h3{ font-size:26px; text-transform:uppercase; margin-bottom:4px; }
+    .modal-head .modal-tag{ font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; opacity:.75; }
+    .modal-close{ position:absolute; top:16px; right:16px; background:#000; color:#fff; border:none; width:32px; height:32px; border-radius:50%; font-size:16px; line-height:1; }
+    .modal-body{ padding:0 26px 28px; font-size:15px; line-height:1.65; }
+    .modal-body p{ margin-bottom:14px; }
+
+    /* --- Scroll reveal generic --- */
+    .reveal{ opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.revealed{ opacity:1; transform:translateY(0); }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    }
+</style>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen overflow-x-hidden m-0 p-0">
-<!-- Splash Screen -->
-<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black overflow-hidden w-full h-full" id="splash-screen">
-<!-- STITCH_SHADER_START:ANIMATION_4 class="fixed inset-0 w-full h-full opacity-60 pointer-events-none" -->
-<div class="fixed inset-0 w-full h-full opacity-60 pointer-events-none" style="display:block;">
-<canvas id="shader-canvas-ANIMATION_4" style="display:block;width:100%;height:100%"></canvas>
-<script>
-(function() {
-  const canvas = document.getElementById('shader-canvas-ANIMATION_4');
-
-  function syncSize() {
-    const w = canvas.clientWidth  || 1280;
-    const h = canvas.clientHeight || 720;
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width  = w;
-      canvas.height = h;
-    }
-  }
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(syncSize).observe(canvas);
-  }
-  syncSize();
-
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if (!gl) return;
-  const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-  const fs = `precision highp float;
-varying vec2 v_texCoord;
-uniform float u_time;
-uniform vec2 u_resolution;
-
-float noise(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
-void main() {
-    vec2 uv = v_texCoord;
-    vec3 baseColor = vec3(0.043, 0.145, 0.098);
-    float scanline = sin(uv.y * 800.0 + u_time * 5.0) * 0.02;
-    float vignette = 1.0 - length(uv - 0.5) * 0.5;
-    vec2 grid = fract(uv * vec2(20.0, 40.0));
-    float gridLine = step(0.05, grid.x) * step(0.05, grid.y);
-    vec3 patternColor = mix(baseColor * 0.9, baseColor, gridLine);
-    vec3 color = patternColor + scanline;
-    color *= vignette;
-    if(noise(uv + u_time * 0.01) > 0.998) {
-        color += 0.2;
-    }
-    gl_FragColor = vec4(color, 1.0);
-}`;
-  function cs(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
-  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
-  gl.linkProgram(prog);
-  gl.useProgram(prog);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  const pos = gl.getAttribLocation(prog, 'a_position');
-  gl.enableVertexAttribArray(pos);
-  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  const uRes = gl.getUniformLocation(prog, 'u_resolution');
-
-  function render(t) {
-    if (typeof ResizeObserver === 'undefined') syncSize();
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    if (uTime) gl.uniform1f(uTime, t * 0.001);
-    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
-  }
-  render(0);
-})();
-</script>
+<body>
+<!-- ============ SPLASH SCREEN ============ -->
+<div id="splash-screen">
+<div class="splash-shader-layer">
+<canvas id="shader-canvas"></canvas>
 </div>
-<!-- STITCH_SHADER_END:ANIMATION_4 -->
 
-<!-- Massive dark green chess pawn, centered behind the logo -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-<div class="absolute w-[85vw] h-[85vw] max-w-[720px] max-h-[720px] rounded-full opacity-70" style="background: radial-gradient(circle, rgba(255,47,208,0.22), rgba(0,245,255,0.14) 40%, transparent 70%); filter: blur(40px);"></div>
-<svg class="relative pawn-glow-pulse w-[62vw] sm:w-[46vw] md:w-[34vw] max-w-[480px] h-auto" viewbox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
+<div class="pawn-wrap">
+<div class="pawn-glow-bg"></div>
+<svg class="pawn-svg pawn-glow-pulse" viewBox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<lineargradient id="pawnGrad" x1="0" x2="0" y1="0" y2="1">
+<linearGradient id="pawnGrad" x1="0" x2="0" y1="0" y2="1">
 <stop offset="0%" stop-color="#2fa86b"></stop>
 <stop offset="18%" stop-color="#177a4a"></stop>
 <stop offset="55%" stop-color="#0b4a2c"></stop>
 <stop offset="100%" stop-color="#062015"></stop>
-</lineargradient>
+</linearGradient>
 </defs>
 <path d="M150,30 C186,30 214,58 214,95 C214,122 202,142 182,158 C165,172 152,182 152,200 C152,212 168,222 195,240 C222,258 233,278 225,300 C218,320 200,330 198,345 C196,358 214,362 235,372 C255,382 260,400 250,420 C240,440 218,455 216,470 C214,485 235,495 245,520 C258,548 262,565 245,585 L55,585 C38,565 42,548 55,520 C65,495 86,485 84,470 C82,455 60,440 50,420 C40,400 45,382 65,372 C86,362 104,358 102,345 C100,330 82,320 75,300 C67,278 78,258 105,240 C132,222 148,212 148,200 C148,182 135,172 118,158 C98,142 86,122 86,95 C86,58 114,30 150,30 Z" fill="url(#pawnGrad)" stroke="#39ff88" stroke-width="4" stroke-linejoin="round"></path>
 </svg>
 </div>
 
-<div class="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 text-center">
-<h1 class="font-display-lg text-[68px] xs:text-[84px] sm:text-[120px] md:text-[180px] lg:text-[220px] mario-text-shadow flex gap-1 sm:gap-2 md:gap-4 mb-6 md:mb-8">
-<span class="drop-in letter-m uppercase">M</span>
-<span class="drop-in letter-r1 uppercase">R</span>
-<span class="w-3 sm:w-6 md:w-10"></span>
-<span class="drop-in letter-b uppercase">B</span>
-<span class="drop-in letter-r2 uppercase">R</span>
-<span class="drop-in letter-i uppercase">I</span>
-<span class="drop-in letter-x uppercase">X</span>
+<div class="splash-center">
+<h1 class="logo-row mario-text-shadow">
+<span class="drop-in letter-m">M</span><span class="drop-in letter-r1">R</span><span class="gap"></span><span class="drop-in letter-b">B</span><span class="drop-in letter-r2">R</span><span class="drop-in letter-i">I</span><span class="drop-in letter-x">X</span>
 </h1>
-<p class="tagline-gradient font-headline-md text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide drop-in" style="animation-delay: 1.6s;">More Than Just A Game Shop</p>
+<p class="tagline-gradient drop-in" style="animation-delay:1.6s;">More Than Just A Game Shop</p>
 </div>
 
-<div class="absolute bottom-10 sm:bottom-14 z-10 flex flex-col items-center gap-6 px-4">
-<button class="btn-press-start font-label-caps text-label-caps text-xl md:text-2xl uppercase tracking-widest px-10 py-5 md:px-14 md:py-6 rounded-sm" id="press-start-btn" type="button">
-                Press to Start
-            </button>
-<p class="font-label-caps copyright-glow text-2xl md:text-3xl text-[#00f5ff] drop-in" style="animation-delay: 2s;">© 2025 MR BRIX</p>
+<div class="splash-bottom">
+<button class="btn-press-start" id="press-start-btn" type="button">Press to Start</button>
+<p class="copyright-glow drop-in" style="animation-delay:2s;">© 2025 MR BRIX</p>
 </div>
 </div>
-<!-- Main Content -->
-<div class="min-h-screen flex flex-col hidden opacity-0 transition-opacity duration-500" id="main-content">
-<!-- TopNavBar -->
-<nav class="bg-surface dark:bg-surface w-full top-0 sticky z-50 border-b-4 border-surface-container-highest dark:border-surface-container-highest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-<div class="flex justify-between items-center px-margin-desktop py-brick-sm max-w-[1280px] mx-auto">
-<div class="font-headline-md text-headline-md tracking-tighter text-secondary-container dark:text-secondary-fixed">
-                    MR BRIX
-                </div>
-<div class="hidden md:flex gap-gutter font-label-caps text-label-caps uppercase">
-<a class="text-primary dark:text-primary border-b-4 border-primary pb-1" href="#">Shop</a>
-<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Build</a>
-<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Gallery</a>
-<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Archive</a>
-<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Events</a>
-<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">About</a>
-</div>
-<div class="flex items-center gap-brick-sm">
-<button class="btn-primary font-label-caps text-label-caps uppercase px-6 py-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none hidden md:block">
-                        Build Now
-                    </button>
-<div class="flex gap-2">
-<button class="p-2 bg-surface-container rounded-sm border-2 border-outline-variant hover:border-primary transition-colors flex items-center justify-center">
-<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-</button>
-<button class="p-2 bg-surface-container rounded-sm border-2 border-outline-variant hover:border-primary transition-colors flex items-center justify-center">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-</button>
-</div>
-</div>
+
+<!-- ============ MAIN HOMEPAGE ============ -->
+<div id="main-content">
+
+<nav class="site-nav" id="site-nav">
+<div class="nav-inner">
+<div class="nav-logo">Mr Brix</div>
+<a class="nav-cta" href="#brands">Shop In-Store</a>
 </div>
 </nav>
-<!-- Hero Section -->
-<main class="flex-grow max-w-[1280px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-brick-lg">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-brick-lg">
-<!-- Main Feature -->
-<div class="md:col-span-8 bg-surface-container-high rounded-xl border border-tertiary-fixed-dim/30 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden brick-border">
-<div class="absolute inset-0 stud-pattern opacity-10"></div>
-<div class="relative z-10 p-brick-md h-full flex flex-col justify-end min-h-[400px]">
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/50 to-transparent z-0"></div>
-<div class="relative z-10">
-<h2 class="font-display-lg text-display-lg md:text-display-lg text-secondary-fixed uppercase leading-none mb-4">Your Move<br/>Starts Here</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-6">More than just a game shop. Copy coming soon.</p>
-<button class="btn-primary font-label-caps text-label-caps uppercase px-8 py-4 inline-flex items-center gap-2">
-                                Start Building <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Side Panels -->
-<div class="md:col-span-4 flex flex-col gap-gutter">
-<div class="bg-surface-container rounded-xl border border-secondary-fixed-dim/30 p-brick-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 brick-border flex flex-col justify-between">
-<div class="w-full h-32 bg-primary-container rounded-sm border-2 border-on-primary-fixed-variant mb-4 flex items-center justify-center stud-pattern">
-<span class="material-symbols-outlined text-4xl text-on-primary-container">category</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary">New Sets</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4 mt-2">Copy coming soon.</p>
-<a class="font-label-caps text-label-caps text-secondary-fixed hover:text-primary transition-colors uppercase inline-flex items-center gap-1" href="#">View Collection <span class="material-symbols-outlined text-sm">chevron_right</span></a>
-</div>
-<div class="bg-surface-container rounded-xl border border-tertiary-container/30 p-brick-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 brick-border flex flex-col justify-between">
-<div class="w-full h-32 bg-tertiary-container rounded-sm border-2 border-on-tertiary-fixed-variant mb-4 flex items-center justify-center stud-pattern">
-<span class="material-symbols-outlined text-4xl text-on-tertiary-container">extension</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-tertiary">Loose Bricks</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4 mt-2">Copy coming soon.</p>
-<a class="font-label-caps text-label-caps text-tertiary-fixed-dim hover:text-tertiary transition-colors uppercase inline-flex items-center gap-1" href="#">Shop Bricks <span class="material-symbols-outlined text-sm">chevron_right</span></a>
-</div>
-</div>
-</div>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container-low dark:bg-surface-container-low w-full mt-brick-lg border-t-8 border-primary dark:border-primary">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter px-margin-desktop py-brick-md max-w-[1280px] mx-auto">
-<div class="flex flex-col gap-4">
-<div class="font-headline-lg text-headline-lg text-primary">
-                        MR BRIX
-                    </div>
-<p class="font-label-caps text-label-caps text-secondary-fixed-dim dark:text-secondary-fixed-dim uppercase">
-                        © 2025 MR BRIX. EST 2025. BUILT TO LAST.
-                    </p>
-</div>
-<div class="flex flex-col md:items-end justify-end gap-2 font-label-caps text-label-caps">
-<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Terms of Service</a>
-<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a>
-<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Contact Us</a>
-<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Instructions</a>
-</div>
-</div>
-</footer>
-</div>
-<script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const splash = document.getElementById('splash-screen');
-            const main = document.getElementById('main-content');
-            const startBtn = document.getElementById('press-start-btn');
 
-            startBtn.addEventListener('click', () => {
-                splash.classList.add('slide-up');
-                main.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    main.classList.remove('opacity-0');
-                });
-                setTimeout(() => {
-                    splash.classList.add('hidden');
-                }, 900);
-            });
-        });
-    </script>
-</body></html>
+<header class="hero">
+<div class="hero-shape shape-a"></div>
+<div class="hero-shape shape-b"></div>
+<div class="hero-inner">
+<span class="hero-kicker">Tamborine Mountain, QLD</span>
+<h1>Your Local Game Shop<br/>On The Mountain</h1>
+<p class="lead">Tucked into the heart of Tamborine Mountain, Mr Brix is a haven for toy enthusiasts, card game aficionados, and board game lovers alike. Trading cards, tabletop staples, building sets and collectibles on the shelf — plus a regular calendar of leagues, classes and game nights for the local community.</p>
+<div class="hero-ctas">
+<a class="btn-solid" href="#brands">See What We Stock</a>
+<a class="btn-outline" href="#visit">Visit Us</a>
+</div>
+<div class="facts-row" id="visit">
+<span>📍 <strong>104 Long Rd</strong>, Tamborine Mountain QLD 4272</span>
+<span>📞 <strong>0472 873 352</strong></span>
+<span>📸 <strong>@mrbrixtcg</strong></span>
+</div>
+</div>
+</header>
+
+<div class="marquee-band">
+<div class="marquee-track">
+<span>Weekly Pokémon League</span><span>Dungeons &amp; Dragons Nights</span><span>Chess Classes For All Ages</span><span>Weekly Pokémon League</span><span>Dungeons &amp; Dragons Nights</span><span>Chess Classes For All Ages</span>
+</div>
+</div>
+
+<section class="brands-section" id="brands">
+<div class="brands-head reveal">
+<span class="caps-tag">On The Shelf</span>
+<h2>Brands We Sell</h2>
+<p>From trading card games to tabletop classics, here's a taste of what you'll find in-store. Tap any card for a quick rundown.</p>
+</div>
+
+<div class="brand-grid">
+
+<div class="brand-card card-pokemon" tabindex="0" role="button" data-brand="pokemon">
+<span class="card-icon">🔴</span>
+<h3>Pokémon TCG</h3>
+<p class="card-tag">Trading Card Game</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-mtg" tabindex="0" role="button" data-brand="mtg">
+<span class="card-icon">🔮</span>
+<h3>Magic: The Gathering</h3>
+<p class="card-tag">Trading Card Game</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-yugioh" tabindex="0" role="button" data-brand="yugioh">
+<span class="card-icon">🐉</span>
+<h3>Yu-Gi-Oh!</h3>
+<p class="card-tag">Trading Card Game</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-dnd" tabindex="0" role="button" data-brand="dnd">
+<span class="card-icon">🎲</span>
+<h3>Dungeons &amp; Dragons</h3>
+<p class="card-tag">Tabletop RPG · Weekly Nights</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-chess" tabindex="0" role="button" data-brand="chess">
+<span class="card-icon">♟️</span>
+<h3>Chess</h3>
+<p class="card-tag">Classes Running Weekly</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-lego" tabindex="0" role="button" data-brand="lego">
+<span class="card-icon">🧱</span>
+<h3>Building Sets</h3>
+<p class="card-tag">Bricks &amp; Construction Toys</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-funko" tabindex="0" role="button" data-brand="funko">
+<span class="card-icon">🧸</span>
+<h3>Funko Pop!</h3>
+<p class="card-tag">Collectible Vinyl Figures</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+<div class="brand-card card-boardgames" tabindex="0" role="button" data-brand="boardgames">
+<span class="card-icon">🧩</span>
+<h3>Board Games</h3>
+<p class="card-tag">Family &amp; Strategy Tabletop</p>
+<button class="card-more-btn" type="button">Click For More Info</button>
+</div>
+
+</div>
+</section>
+
+<section class="community-strip reveal">
+<h2>More Than A Shelf — It's A Table</h2>
+<p>Mr Brix runs regular Pokémon League nights, Dungeons &amp; Dragons sessions and chess classes for every age and skill level. Pop in, pull up a chair, and play.</p>
+</section>
+
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-col">
+<div class="footer-brand">Mr Brix</div>
+<p>More Than Just A Game Shop</p>
+</div>
+<div class="footer-col">
+<p>📍 104 Long Rd, Tamborine Mountain QLD 4272</p>
+<p>📞 0472 873 352</p>
+<a href="https://www.instagram.com/mrbrixtcg/" target="_blank" rel="noopener">📸 @mrbrixtcg</a>
+</div>
+</div>
+<div class="footer-bottom">© 2025 Mr Brix. Built On The Mountain.</div>
+</footer>
+
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="brand-modal">
+<div class="modal-box">
+<div class="modal-head" id="modal-head">
+<button class="modal-close" id="modal-close" type="button" aria-label="Close">✕</button>
+<span class="modal-icon" id="modal-icon"></span>
+<h3 id="modal-title"></h3>
+<span class="modal-tag" id="modal-tag"></span>
+</div>
+<div class="modal-body">
+<p id="modal-desc"></p>
+</div>
+</div>
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('shader-canvas');
+  function syncSize(){
+    var w = canvas.clientWidth || 1280, h = canvas.clientHeight || 720;
+    if(canvas.width!==w || canvas.height!==h){ canvas.width=w; canvas.height=h; }
+  }
+  if(typeof ResizeObserver!=='undefined'){ new ResizeObserver(syncSize).observe(canvas); }
+  syncSize();
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if(gl){
+    var vs = "attribute vec2 a_position;varying vec2 v_texCoord;void main(){v_texCoord=a_position*0.5+0.5;gl_Position=vec4(a_position,0.0,1.0);}";
+    var fs = "precision highp float;varying vec2 v_texCoord;uniform float u_time;uniform vec2 u_resolution;" +
+      "float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}" +
+      "void main(){vec2 uv=v_texCoord;vec3 baseColor=vec3(0.043,0.145,0.098);" +
+      "float scanline=sin(uv.y*800.0+u_time*5.0)*0.02;float vignette=1.0-length(uv-0.5)*0.5;" +
+      "vec2 grid=fract(uv*vec2(20.0,40.0));float gridLine=step(0.05,grid.x)*step(0.05,grid.y);" +
+      "vec3 patternColor=mix(baseColor*0.9,baseColor,gridLine);vec3 color=patternColor+scanline;color*=vignette;" +
+      "if(noise(uv+u_time*0.01)>0.998){color+=0.2;}gl_FragColor=vec4(color,1.0);}";
+    function cs(type,src){ var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s); return s; }
+    var prog = gl.createProgram();
+    gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    var pos = gl.getAttribLocation(prog,'a_position');
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+    var uTime = gl.getUniformLocation(prog,'u_time');
+    var uRes = gl.getUniformLocation(prog,'u_resolution');
+    function render(t){
+      if(typeof ResizeObserver==='undefined') syncSize();
+      gl.viewport(0,0,canvas.width,canvas.height);
+      if(uTime) gl.uniform1f(uTime, t*0.001);
+      if(uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+      requestAnimationFrame(render);
+    }
+    render(0);
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', function(){
+  var splash = document.getElementById('splash-screen');
+  var main = document.getElementById('main-content');
+  var startBtn = document.getElementById('press-start-btn');
+
+  startBtn.addEventListener('click', function(){
+    splash.classList.add('slide-up');
+    main.style.display = 'block';
+    requestAnimationFrame(function(){ main.style.opacity = '1'; });
+    setTimeout(function(){ splash.style.display = 'none'; }, 900);
+  });
+
+  /* Scroll-reveal for brand cards + generic reveal blocks */
+  var revealTargets = document.querySelectorAll('.brand-card, .reveal');
+  revealTargets.forEach(function(el, i){
+    el.style.transitionDelay = (i % 8) * 70 + 'ms';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+  revealTargets.forEach(function(el){ io.observe(el); });
+
+  /* Sticky nav shrink on scroll */
+  var nav = document.getElementById('site-nav');
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        nav.classList.toggle('scrolled', window.scrollY > 30);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  /* Subtle tilt on brand cards */
+  document.querySelectorAll('.brand-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'translateY(0) rotate(0deg) perspective(600px) rotateX(' + (y*-8) + 'deg) rotateY(' + (x*8) + 'deg)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transform = '';
+    });
+  });
+
+  /* Brand info modal */
+  var brandData = {
+    pokemon: { icon:'🔴', title:'Pokémon TCG', tag:'Trading Card Game', desc:'The Pokémon Trading Card Game has players battle using decks built around Pokémon, Trainer, and Energy cards. Mr Brix runs a regular Pokémon League and Open Day events for trainers of every age to trade, battle, and level up.' },
+    mtg: { icon:'🔮', title:'Magic: The Gathering', tag:'Trading Card Game', desc:'Magic: The Gathering is the original trading card game, where planeswalkers cast spells and summon creatures using five colours of mana. Pick up singles, boosters, and starter decks in-store.' },
+    yugioh: { icon:'🐉', title:'Yu-Gi-Oh!', tag:'Trading Card Game', desc:'Yu-Gi-Oh! is a fast-paced trading card game built around Monsters, Spells, and Traps. Build a deck, learn the meta, and duel it out with fellow duellists at Mr Brix.' },
+    dnd: { icon:'🎲', title:'Dungeons & Dragons', tag:'Tabletop RPG', desc:'Dungeons & Dragons is the classic tabletop role-playing game, where a Dungeon Master guides a party of adventurers through stories built on imagination and a set of dice. Mr Brix hosts regular D&D nights and classes for new and veteran players alike.' },
+    chess: { icon:'♟️', title:'Chess', tag:'Classic Strategy', desc:"Chess is the timeless game of strategy played across a 64-square board. Mr Brix runs chess classes and events on the mountain for players of every skill level, from first moves to tournament play." },
+    lego: { icon:'🧱', title:'Building Sets', tag:'Bricks & Construction Toys', desc:'From classic bricks to licensed sets, building toys let builders of any age construct anything they can imagine, one piece at a time.' },
+    funko: { icon:'🧸', title:'Funko Pop!', tag:'Collectible Vinyl Figures', desc:'Funko Pop! vinyl figures put a stylised, big-headed spin on characters from movies, games, and pop culture — perfect for collectors and shelf displays alike.' },
+    boardgames: { icon:'🧩', title:'Board Games', tag:'Family & Strategy Tabletop', desc:'Beyond cards and bricks, Mr Brix stocks a shelf of tabletop board games for family game nights, strategy sessions, and everything in between.' }
+  };
+
+  var modal = document.getElementById('brand-modal');
+  var modalIcon = document.getElementById('modal-icon');
+  var modalTitle = document.getElementById('modal-title');
+  var modalTag = document.getElementById('modal-tag');
+  var modalDesc = document.getElementById('modal-desc');
+  var lastFocused = null;
+
+  function openModal(key){
+    var data = brandData[key];
+    if(!data) return;
+    modalIcon.textContent = data.icon;
+    modalTitle.textContent = data.title;
+    modalTag.textContent = data.tag;
+    modalDesc.textContent = data.desc;
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    document.getElementById('modal-close').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    if(lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('.brand-card').forEach(function(card){
+    card.addEventListener('click', function(){ openModal(card.getAttribute('data-brand')); });
+    card.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openModal(card.getAttribute('data-brand')); }
+    });
+  });
+  document.querySelectorAll('.card-more-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      openModal(btn.closest('.brand-card').getAttribute('data-brand'));
+    });
+  });
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) closeModal(); });
+});
+</script>
+</body>
+</html>
