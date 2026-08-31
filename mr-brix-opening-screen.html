@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MR BRIX - Opening Screen &amp; Homepage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#efc200",
+                        "on-secondary-container": "#715b00",
+                        "outline-variant": "#5e3f3a",
+                        "on-tertiary-container": "#f6f6ff",
+                        "error-container": "#93000a",
+                        "surface-container": "#1e2020",
+                        "secondary-fixed": "#ffe084",
+                        "surface": "#121414",
+                        "on-background": "#e2e2e2",
+                        "surface-container-high": "#282a2b",
+                        "tertiary-fixed-dim": "#afc6ff",
+                        "inverse-surface": "#e2e2e2",
+                        "on-primary-container": "#fff4f2",
+                        "tertiary": "#afc6ff",
+                        "on-surface": "#e2e2e2",
+                        "on-primary-fixed": "#410001",
+                        "surface-container-low": "#1a1c1c",
+                        "on-tertiary-fixed": "#001943",
+                        "surface-bright": "#37393a",
+                        "primary-container": "#e3000b",
+                        "on-primary-fixed-variant": "#930004",
+                        "on-primary": "#690002",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-tint": "#ffb4a9",
+                        "primary-fixed": "#ffdad5",
+                        "tertiary-fixed": "#d9e2ff",
+                        "secondary-container": "#ffd336",
+                        "on-tertiary": "#002d6c",
+                        "surface-container-lowest": "#0c0f0f",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#004298",
+                        "primary-fixed-dim": "#ffb4a9",
+                        "on-secondary-fixed": "#231b00",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#333535",
+                        "on-surface-variant": "#e9bcb6",
+                        "on-error": "#690005",
+                        "background": "#121414",
+                        "surface-variant": "#333535",
+                        "outline": "#af8781",
+                        "primary": "#ffb4a9",
+                        "surface-dim": "#121414",
+                        "tertiary-container": "#306dd7",
+                        "on-secondary": "#3c2f00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-primary": "#c00007",
+                        "secondary": "#fff3d7"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "brick-md": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "brick-lg": "64px",
+                        "gutter": "24px",
+                        "brick-sm": "16px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "body-lg": ["Space Grotesk"],
+                        "body-md": ["Space Grotesk"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "label-caps": ["Space Mono"],
+                        "headline-md": ["Bricolage Grotesque"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "800" }],
+                        "body-lg": ["20px", { lineHeight: "1.5", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-lg": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "800" }],
+                        "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "label-caps": ["14px", { lineHeight: "1", fontWeight: "700" }],
+                        "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .mario-text-shadow {
+            text-shadow:
+                -2px -2px 0 #deb887,
+                2px -2px 0 #deb887,
+                -2px 2px 0 #8b4513,
+                2px 2px 0 #8b4513,
+                0px 8px 0px #8b4513,
+                0px 12px 10px rgba(0,0,0,0.8);
+            transform: perspective(500px) rotateX(10deg);
+        }
+
+        .drop-in {
+            animation: dropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, float 3s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(-50px) scale(0.5);
+            display: inline-block;
+        }
+
+        @keyframes dropIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .letter-m { animation-delay: 0.1s, 0.9s; color: #4169e1; } /* Blue */
+        .letter-r1 { animation-delay: 0.3s, 1.1s; color: #ff0000; } /* Red */
+        .letter-b { animation-delay: 0.5s, 1.3s; color: #ffff00; } /* Yellow */
+        .letter-r2 { animation-delay: 0.7s, 1.5s; color: #00ff00; } /* Green */
+        .letter-i { animation-delay: 0.9s, 1.7s; color: #ff0000; } /* Red */
+        .letter-x { animation-delay: 1.1s, 1.9s; color: #00ced1; } /* Blue/Green */
+
+        .slide-up {
+            animation: slideUp 0.9s cubic-bezier(0.6, 0, 0.8, 0.2) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        .brick-border {
+            border: 2px solid;
+            border-top-color: rgba(255,255,255,0.2);
+            border-left-color: rgba(255,255,255,0.2);
+            border-bottom-color: rgba(0,0,0,0.5);
+            border-right-color: rgba(0,0,0,0.5);
+        }
+
+        .stud-pattern {
+            background-image: radial-gradient(circle, rgba(0,0,0,0.1) 2px, transparent 2px);
+            background-size: 8px 8px;
+        }
+
+        .btn-primary {
+            background-color: theme('colors.primary-container');
+            border-bottom: 4px solid theme('colors.on-primary-fixed-variant');
+            color: theme('colors.on-primary-container');
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .btn-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+
+        /* --- Massive dark-green chess pawn --- */
+        .pawn-glow-pulse {
+            animation: pawnGlow 3.2s ease-in-out infinite;
+        }
+        @keyframes pawnGlow {
+            0%, 100% { filter: drop-shadow(0 0 35px rgba(16,185,129,0.55)) drop-shadow(0 0 70px rgba(16,185,129,0.25)); }
+            50% { filter: drop-shadow(0 0 60px rgba(16,185,129,0.9)) drop-shadow(0 0 110px rgba(16,185,129,0.4)); }
+        }
+
+        /* --- Vibrant animated tagline --- */
+        .tagline-gradient {
+            background: linear-gradient(90deg, #00f5ff, #ff2fd0, #ffd336, #39ff88, #00f5ff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: taglineShift 5s linear infinite;
+        }
+        @keyframes taglineShift {
+            to { background-position: 300% center; }
+        }
+
+        /* --- Press to Start button --- */
+        .btn-press-start {
+            background: linear-gradient(135deg, #ffd336 0%, #ff8a00 55%, #ff2fd0 100%);
+            border: 3px solid #0c0f0f;
+            color: #1a0f00;
+            text-shadow: 0px 1px 0px rgba(255,255,255,0.3);
+            animation: startPulse 1.5s ease-in-out infinite;
+        }
+        .btn-press-start:active {
+            transform: translate(3px, 3px) scale(0.98) !important;
+        }
+        @keyframes startPulse {
+            0%, 100% {
+                box-shadow: 6px 6px 0px 0px rgba(0,0,0,1), 0 0 22px 4px rgba(57,255,136,0.55);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 6px 6px 0px 0px rgba(0,0,0,1), 0 0 38px 10px rgba(255,47,208,0.65);
+                transform: scale(1.035);
+            }
+        }
+
+        .copyright-glow {
+            text-shadow: 0 0 8px rgba(0,245,255,0.8), 0 0 18px rgba(0,245,255,0.4), 1px 1px 2px rgba(0,0,0,0.9);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen overflow-x-hidden m-0 p-0">
+<!-- Splash Screen -->
+<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black overflow-hidden w-full h-full" id="splash-screen">
+<!-- STITCH_SHADER_START:ANIMATION_4 class="fixed inset-0 w-full h-full opacity-60 pointer-events-none" -->
+<div class="fixed inset-0 w-full h-full opacity-60 pointer-events-none" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_4" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_4');
+
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+float noise(vec2 p) {
+    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec3 baseColor = vec3(0.043, 0.145, 0.098);
+    float scanline = sin(uv.y * 800.0 + u_time * 5.0) * 0.02;
+    float vignette = 1.0 - length(uv - 0.5) * 0.5;
+    vec2 grid = fract(uv * vec2(20.0, 40.0));
+    float gridLine = step(0.05, grid.x) * step(0.05, grid.y);
+    vec3 patternColor = mix(baseColor * 0.9, baseColor, gridLine);
+    vec3 color = patternColor + scanline;
+    color *= vignette;
+    if(noise(uv + u_time * 0.01) > 0.998) {
+        color += 0.2;
+    }
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_4 -->
+
+<!-- Massive dark green chess pawn, centered behind the logo -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="absolute w-[85vw] h-[85vw] max-w-[720px] max-h-[720px] rounded-full opacity-70" style="background: radial-gradient(circle, rgba(255,47,208,0.22), rgba(0,245,255,0.14) 40%, transparent 70%); filter: blur(40px);"></div>
+<svg class="relative pawn-glow-pulse w-[62vw] sm:w-[46vw] md:w-[34vw] max-w-[480px] h-auto" viewbox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="pawnGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#2fa86b"></stop>
+<stop offset="18%" stop-color="#177a4a"></stop>
+<stop offset="55%" stop-color="#0b4a2c"></stop>
+<stop offset="100%" stop-color="#062015"></stop>
+</lineargradient>
+</defs>
+<path d="M150,30 C186,30 214,58 214,95 C214,122 202,142 182,158 C165,172 152,182 152,200 C152,212 168,222 195,240 C222,258 233,278 225,300 C218,320 200,330 198,345 C196,358 214,362 235,372 C255,382 260,400 250,420 C240,440 218,455 216,470 C214,485 235,495 245,520 C258,548 262,565 245,585 L55,585 C38,565 42,548 55,520 C65,495 86,485 84,470 C82,455 60,440 50,420 C40,400 45,382 65,372 C86,362 104,358 102,345 C100,330 82,320 75,300 C67,278 78,258 105,240 C132,222 148,212 148,200 C148,182 135,172 118,158 C98,142 86,122 86,95 C86,58 114,30 150,30 Z" fill="url(#pawnGrad)" stroke="#39ff88" stroke-width="4" stroke-linejoin="round"></path>
+</svg>
+</div>
+
+<div class="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 text-center">
+<h1 class="font-display-lg text-[68px] xs:text-[84px] sm:text-[120px] md:text-[180px] lg:text-[220px] mario-text-shadow flex gap-1 sm:gap-2 md:gap-4 mb-6 md:mb-8">
+<span class="drop-in letter-m uppercase">M</span>
+<span class="drop-in letter-r1 uppercase">R</span>
+<span class="w-3 sm:w-6 md:w-10"></span>
+<span class="drop-in letter-b uppercase">B</span>
+<span class="drop-in letter-r2 uppercase">R</span>
+<span class="drop-in letter-i uppercase">I</span>
+<span class="drop-in letter-x uppercase">X</span>
+</h1>
+<p class="tagline-gradient font-headline-md text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide drop-in" style="animation-delay: 1.6s;">More Than Just A Game Shop</p>
+</div>
+
+<div class="absolute bottom-10 sm:bottom-14 z-10 flex flex-col items-center gap-6 px-4">
+<button class="btn-press-start font-label-caps text-label-caps text-xl md:text-2xl uppercase tracking-widest px-10 py-5 md:px-14 md:py-6 rounded-sm" id="press-start-btn" type="button">
+                Press to Start
+            </button>
+<p class="font-label-caps copyright-glow text-2xl md:text-3xl text-[#00f5ff] drop-in" style="animation-delay: 2s;">© 2025 MR BRIX</p>
+</div>
+</div>
+<!-- Main Content -->
+<div class="min-h-screen flex flex-col hidden opacity-0 transition-opacity duration-500" id="main-content">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface w-full top-0 sticky z-50 border-b-4 border-surface-container-highest dark:border-surface-container-highest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<div class="flex justify-between items-center px-margin-desktop py-brick-sm max-w-[1280px] mx-auto">
+<div class="font-headline-md text-headline-md tracking-tighter text-secondary-container dark:text-secondary-fixed">
+                    MR BRIX
+                </div>
+<div class="hidden md:flex gap-gutter font-label-caps text-label-caps uppercase">
+<a class="text-primary dark:text-primary border-b-4 border-primary pb-1" href="#">Shop</a>
+<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Build</a>
+<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Gallery</a>
+<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Archive</a>
+<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">Events</a>
+<a class="text-on-surface dark:text-on-surface hover:text-secondary-container transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-brick-sm">
+<button class="btn-primary font-label-caps text-label-caps uppercase px-6 py-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none hidden md:block">
+                        Build Now
+                    </button>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container rounded-sm border-2 border-outline-variant hover:border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 bg-surface-container rounded-sm border-2 border-outline-variant hover:border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<main class="flex-grow max-w-[1280px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-brick-lg">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-brick-lg">
+<!-- Main Feature -->
+<div class="md:col-span-8 bg-surface-container-high rounded-xl border border-tertiary-fixed-dim/30 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden brick-border">
+<div class="absolute inset-0 stud-pattern opacity-10"></div>
+<div class="relative z-10 p-brick-md h-full flex flex-col justify-end min-h-[400px]">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/50 to-transparent z-0"></div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-display-lg md:text-display-lg text-secondary-fixed uppercase leading-none mb-4">Your Move<br/>Starts Here</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-6">More than just a game shop. Copy coming soon.</p>
+<button class="btn-primary font-label-caps text-label-caps uppercase px-8 py-4 inline-flex items-center gap-2">
+                                Start Building <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Side Panels -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container rounded-xl border border-secondary-fixed-dim/30 p-brick-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 brick-border flex flex-col justify-between">
+<div class="w-full h-32 bg-primary-container rounded-sm border-2 border-on-primary-fixed-variant mb-4 flex items-center justify-center stud-pattern">
+<span class="material-symbols-outlined text-4xl text-on-primary-container">category</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">New Sets</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 mt-2">Copy coming soon.</p>
+<a class="font-label-caps text-label-caps text-secondary-fixed hover:text-primary transition-colors uppercase inline-flex items-center gap-1" href="#">View Collection <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="bg-surface-container rounded-xl border border-tertiary-container/30 p-brick-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 brick-border flex flex-col justify-between">
+<div class="w-full h-32 bg-tertiary-container rounded-sm border-2 border-on-tertiary-fixed-variant mb-4 flex items-center justify-center stud-pattern">
+<span class="material-symbols-outlined text-4xl text-on-tertiary-container">extension</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-tertiary">Loose Bricks</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 mt-2">Copy coming soon.</p>
+<a class="font-label-caps text-label-caps text-tertiary-fixed-dim hover:text-tertiary transition-colors uppercase inline-flex items-center gap-1" href="#">Shop Bricks <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-low w-full mt-brick-lg border-t-8 border-primary dark:border-primary">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter px-margin-desktop py-brick-md max-w-[1280px] mx-auto">
+<div class="flex flex-col gap-4">
+<div class="font-headline-lg text-headline-lg text-primary">
+                        MR BRIX
+                    </div>
+<p class="font-label-caps text-label-caps text-secondary-fixed-dim dark:text-secondary-fixed-dim uppercase">
+                        © 2025 MR BRIX. EST 2025. BUILT TO LAST.
+                    </p>
+</div>
+<div class="flex flex-col md:items-end justify-end gap-2 font-label-caps text-label-caps">
+<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Contact Us</a>
+<a class="text-on-surface-variant opacity-80 hover:text-primary transition-colors cursor-pointer" href="#">Instructions</a>
+</div>
+</div>
+</footer>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-content');
+            const startBtn = document.getElementById('press-start-btn');
+
+            startBtn.addEventListener('click', () => {
+                splash.classList.add('slide-up');
+                main.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    main.classList.remove('opacity-0');
+                });
+                setTimeout(() => {
+                    splash.classList.add('hidden');
+                }, 900);
+            });
+        });
+    </script>
+</body></html>
