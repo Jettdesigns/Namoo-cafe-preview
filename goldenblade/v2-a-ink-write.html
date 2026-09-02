@@ -54,7 +54,7 @@
   .wm-text{
     white-space:nowrap;
     font-family:'Yellowtail', cursive;
-    font-size:clamp(34px, 6.2vw, 64px);
+    font-size:clamp(42px, 7.6vw, 84px);
     line-height:1.05;
     padding:0 4px;
   }
@@ -68,8 +68,9 @@
     transform:translateX(-20px);
   }
 
-  .razor-el{ position:absolute; pointer-events:none; }
+  .razor-el{ position:absolute; pointer-events:none; visibility:hidden; }
   .razor-el svg{ display:block; width:100%; height:100%; overflow:visible; }
+  .fonts-ready .razor-el{ visibility:visible; }
 
   .underline-wrap{ margin-top:2px; width:100%; }
   .underline-wrap svg{ display:block; width:100%; height:20px; overflow:visible; }
@@ -115,26 +116,26 @@
             <span class="wm-text">
               <span class="wm-gold">Golden</span><span class="wm-gold">B</span><span class="wm-hidden" id="hiddenL">l</span><span class="wm-gold">ade</span>
             </span>
+            <div class="razor-el" id="razorEl">
+              <svg viewBox="0 0 260 150" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="razorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"  stop-color="#8A6423"/>
+                    <stop offset="30%" stop-color="#D9B565"/>
+                    <stop offset="55%" stop-color="#FBE7A8"/>
+                    <stop offset="80%" stop-color="#C9A24B"/>
+                    <stop offset="100%" stop-color="#7A5A22"/>
+                  </linearGradient>
+                </defs>
+                <rect x="30" y="6" width="22" height="112" rx="10" fill="url(#razorGrad)"/>
+                <g id="bladeGroup" style="transform-origin:41px 118px;">
+                  <polygon points="41,110 150,101 246,96 152,118 41,126" fill="url(#razorGrad)"/>
+                </g>
+                <circle cx="41" cy="118" r="8.5" fill="#3a2a10" stroke="url(#razorGrad)" stroke-width="2.5"/>
+              </svg>
+            </div>
           </div>
           <div class="glint" id="glint"></div>
-          <div class="razor-el" id="razorEl">
-            <svg viewBox="0 0 260 150" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="razorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"  stop-color="#8A6423"/>
-                  <stop offset="30%" stop-color="#D9B565"/>
-                  <stop offset="55%" stop-color="#FBE7A8"/>
-                  <stop offset="80%" stop-color="#C9A24B"/>
-                  <stop offset="100%" stop-color="#7A5A22"/>
-                </linearGradient>
-              </defs>
-              <rect x="30" y="6" width="22" height="112" rx="10" fill="url(#razorGrad)"/>
-              <g id="bladeGroup" style="transform-origin:41px 118px;">
-                <polygon points="41,110 150,101 246,96 152,118 41,126" fill="url(#razorGrad)"/>
-              </g>
-              <circle cx="41" cy="118" r="8.5" fill="#3a2a10" stroke="url(#razorGrad)" stroke-width="2.5"/>
-            </svg>
-          </div>
 
           <div class="underline-wrap">
             <svg viewBox="0 0 400 20" preserveAspectRatio="none">
@@ -192,7 +193,6 @@
     razor.style.left = left + "px";
     razor.style.top = top + "px";
   }
-  positionRazor();
   window.addEventListener("resize", positionRazor);
 
   var ulinePath = document.getElementById("ulinePath");
@@ -249,10 +249,21 @@
     return tl;
   }
 
-  var tl = buildTimeline();
-  tl.play();
+  var tl = null;
+
+  function start(){
+    positionRazor();
+    document.documentElement.classList.add("fonts-ready");
+    tl = buildTimeline();
+    tl.play();
+  }
+
+  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  var safetyTimeout = new Promise(function(resolve){ setTimeout(resolve, 1500); });
+  Promise.race([fontsReady, safetyTimeout]).then(start);
 
   document.getElementById("replayBtn").addEventListener("click", function(){
+    if (!tl) return;
     tl.kill();
     gsap.set(flipCard, { rotationY:0 });
     positionRazor();
