@@ -1,0 +1,114 @@
+<!doctype html>
+<title>GoldenBlade — Opening Concepts v2</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Yellowtail&family=Rokkitt:wght@600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #050403;
+    --ink-2:      #100C08;
+    --panel:      #17110A;
+    --gold-4:     #C9A24B;
+    --gold-bright:#F1D488;
+    --paper:      #EFE7D8;
+    --paper-dim:  #B0A793;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:72px 28px 64px; }
+
+  header{ margin-bottom:48px; }
+  .eyebrow{ font-size:11px; letter-spacing:4px; color:var(--gold-4); text-transform:uppercase; margin:0 0 16px; }
+  .wm{ font-family:'Yellowtail', cursive; font-size:clamp(36px,5.5vw,56px); color:var(--gold-4); margin:0 0 18px; }
+  header p{ max-width:64ch; color:var(--paper-dim); font-size:16px; line-height:1.65; margin:0; }
+
+  .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  @media (max-width:860px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:linear-gradient(165deg, var(--panel), var(--ink-2));
+    border:1px solid rgba(201,162,75,.22);
+    border-radius:4px;
+    padding:24px 22px 22px;
+    display:flex; flex-direction:column; gap:12px;
+    text-decoration:none; color:inherit;
+    transition:border-color .2s, transform .2s;
+  }
+  .card:hover{ border-color:rgba(201,162,75,.6); transform:translateY(-2px); }
+  .card:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; }
+
+  .num{ font-size:11px; letter-spacing:3px; color:var(--gold-4); }
+  .card h2{ font-family:'Rokkitt'; font-weight:700; font-size:19px; margin:0; letter-spacing:.3px; }
+  .card p{ margin:0; color:var(--paper-dim); font-size:14px; line-height:1.6; flex:1; }
+
+  .open{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold-bright); margin-top:2px;
+  }
+  .open .arrow{ transition:transform .2s; }
+  .card:hover .open .arrow{ transform:translateX(4px); }
+
+  footer{
+    margin-top:48px; padding-top:24px; border-top:1px solid rgba(201,162,75,.18);
+    font-size:13px; color:var(--paper-dim); line-height:1.7;
+  }
+  footer strong{ color:var(--paper); }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">GoldenBlade GC Barbershop &middot; Surfers Paradise</p>
+    <div class="wm">GoldenBlade</div>
+    <p>
+      Round two, built directly on your real logo: the script wordmark, "BARBERSHOP"
+      beneath it, and the razor standing in for the L in "Blade". All three write the
+      word on differently, then share the same close — the L-razor gives two quick
+      snips, a gold underline is already drawn beneath, and the whole mark flips over
+      like a card to where the homepage will load (not built yet — this is only the
+      transition). Each is silent and self-contained; hit Replay to run it again.
+    </p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="https://claude.ai/code/artifact/83e51278-a76a-4e6a-8caa-090a12c5b180" target="_blank" rel="noopener">
+      <span class="num">CONCEPT A</span>
+      <h2>Ink &amp; Gold</h2>
+      <p>The wordmark writes itself on left to right, like a pen dipped in gold ink, with a glint travelling at the nib. The most handmade-feeling of the three.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/50691dcf-ab80-4ea3-aef0-a05b96b9a166" target="_blank" rel="noopener">
+      <span class="num">CONCEPT B</span>
+      <h2>Gold Type Assembly</h2>
+      <p>"Golden", the razor, and "ade" drop and slam into place from alternating directions with a confident snap. The most energetic of the three.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/eab5827f-36fd-4c77-be0d-973e361e664a" target="_blank" rel="noopener">
+      <span class="num">CONCEPT C</span>
+      <h2>Foil Stamp Sweep</h2>
+      <p>The dim outline of the full word is visible immediately; one fast diagonal flash sweeps across and the gold catches for good, like foil under a press. The most premium and restrained of the three.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+  </div>
+
+  <footer>
+    <strong>On the mark:</strong> rebuilt from the logo file you sent — the Yellowtail
+    script closely matches your wordmark's connected brush strokes, "BARBERSHOP" is set
+    in a bold slab serif to match, and the gold is a five-stop metallic gradient rather
+    than a flat fill for a richer, more luxury finish on black. The underline beneath
+    the wordmark is a new flourish, not in the original — drop it if you'd rather keep
+    the mark exactly as-is.
+  </footer>
+</div>

@@ -1,0 +1,261 @@
+<!doctype html>
+<title>Gold Type Assembly</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Yellowtail&family=Rokkitt:wght@600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #050403;
+    --ink-2:      #100C08;
+    --gold-1:     #8A6423;
+    --gold-2:     #D9B565;
+    --gold-3:     #FBE7A8;
+    --gold-4:     #C9A24B;
+    --gold-5:     #7A5A22;
+    --gold-bright:#F1D488;
+    --paper:      #EFE7D8;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    width:100vw; height:100vh;
+    overflow:hidden;
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .flip-scene{ position:fixed; inset:0; perspective:1800px; }
+  .flip-card{ position:absolute; inset:0; transform-style:preserve-3d; transform:rotateY(0deg); }
+  .face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(ellipse at 50% 46%, var(--ink-2) 0%, var(--ink) 78%);
+  }
+  .face-back{ transform:rotateY(180deg); }
+
+  .wm-gold{
+    background-image:linear-gradient(100deg, var(--gold-1), var(--gold-2) 25%, var(--gold-3) 50%, var(--gold-4) 75%, var(--gold-5));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    display:inline-block;
+    will-change:transform, opacity;
+  }
+
+  .lockup{ text-align:center; }
+  .wordmark-wrap{ position:relative; display:inline-block; }
+
+  .wm-text{
+    white-space:nowrap;
+    font-family:'Yellowtail', cursive;
+    font-size:clamp(34px, 6.2vw, 64px);
+    line-height:1.05;
+    padding:0 4px;
+  }
+  .wm-hidden{ color:transparent; display:inline-block; }
+
+  .razor-el{ position:absolute; pointer-events:none; opacity:0; }
+  .razor-el svg{ display:block; width:100%; height:100%; overflow:visible; }
+
+  .underline-wrap{ margin-top:2px; width:100%; }
+  .underline-wrap svg{ display:block; width:100%; height:20px; overflow:visible; }
+  .uline{ fill:none; stroke:url(#ulGrad); stroke-width:3; stroke-linecap:round; }
+
+  .sub{
+    margin-top:14px;
+    font-family:'Rokkitt', serif; font-weight:700;
+    font-size:clamp(13px, 1.7vw, 19px);
+    letter-spacing:14px;
+    color:var(--paper);
+    opacity:0;
+    text-indent:14px;
+  }
+
+  .caption{ position:fixed; left:28px; bottom:26px; z-index:20; opacity:0; }
+  .caption .kicker{ font-size:11px; letter-spacing:3px; color:var(--gold-4); text-transform:uppercase; }
+  .caption .title{ font-family:'Rokkitt'; font-weight:700; font-size:14px; letter-spacing:1px; color:var(--paper); margin-top:4px; }
+
+  .replay{
+    position:fixed; right:28px; bottom:26px; z-index:20;
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid rgba(201,162,75,.55);
+    color:var(--gold-bright); font-family:'Jost'; font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; padding:10px 16px; border-radius:2px;
+    cursor:pointer; opacity:0; transition:background .2s, color .2s;
+  }
+  .replay:hover{ background:var(--gold-4); color:var(--ink); }
+  .replay:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+
+  .back-label{ text-align:center; opacity:.55; }
+  .back-label .eyebrow{ font-size:11px; letter-spacing:4px; color:var(--gold-4); text-transform:uppercase; }
+  .back-label .name{ font-family:'Yellowtail'; font-size:40px; color:var(--paper); margin-top:10px; }
+  .back-label .note{ font-size:12px; color:#8b8478; margin-top:14px; max-width:34ch; }
+</style>
+
+<div class="flip-scene">
+  <div class="flip-card" id="flipCard">
+    <div class="face face-front">
+      <div class="lockup">
+        <div class="wordmark-wrap" id="wordmarkWrap">
+          <span class="wm-text" id="wmText">
+            <span class="wm-gold chunk">Golden</span><span class="wm-gold chunk">B</span><span class="wm-hidden" id="hiddenL">l</span><span class="wm-gold chunk">ade</span>
+          </span>
+
+          <div class="razor-el" id="razorEl">
+            <svg viewBox="0 0 260 150" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="razorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"  stop-color="#8A6423"/>
+                  <stop offset="30%" stop-color="#D9B565"/>
+                  <stop offset="55%" stop-color="#FBE7A8"/>
+                  <stop offset="80%" stop-color="#C9A24B"/>
+                  <stop offset="100%" stop-color="#7A5A22"/>
+                </linearGradient>
+              </defs>
+              <rect x="30" y="6" width="22" height="112" rx="10" fill="url(#razorGrad)"/>
+              <g id="bladeGroup" style="transform-origin:41px 118px;">
+                <polygon points="41,110 150,101 246,96 152,118 41,126" fill="url(#razorGrad)"/>
+              </g>
+              <circle cx="41" cy="118" r="8.5" fill="#3a2a10" stroke="url(#razorGrad)" stroke-width="2.5"/>
+            </svg>
+          </div>
+
+          <div class="underline-wrap">
+            <svg viewBox="0 0 400 20" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="ulGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#7A5A22"/>
+                  <stop offset="50%" stop-color="#F1D488"/>
+                  <stop offset="100%" stop-color="#7A5A22"/>
+                </linearGradient>
+              </defs>
+              <path class="uline" id="ulinePath" d="M6,10 C 90,2 310,2 394,10"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="sub">BARBERSHOP</div>
+      </div>
+    </div>
+
+    <div class="face face-back">
+      <div class="back-label">
+        <div class="eyebrow">Coming soon</div>
+        <div class="name">GoldenBlade</div>
+        <div class="note">Homepage not built yet — this is only the opening-animation transition, standing in for where the site will load.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="caption">
+  <div class="kicker">Concept B</div>
+  <div class="title">Gold Type Assembly</div>
+</div>
+<button class="replay" id="replayBtn" type="button">&#8635; Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var chunks = document.querySelectorAll(".chunk");
+
+  function positionRazor(){
+    var wrap = document.getElementById("wordmarkWrap");
+    var hiddenL = document.getElementById("hiddenL");
+    var razor = document.getElementById("razorEl");
+    var wrapRect = wrap.getBoundingClientRect();
+    var lRect = hiddenL.getBoundingClientRect();
+
+    var h = lRect.height * 1.0;
+    var w = h * (260 / 150);
+    var left = (lRect.left - wrapRect.left) - h * 0.05;
+    var top  = (lRect.top - wrapRect.top);
+
+    razor.style.width = w + "px";
+    razor.style.height = h + "px";
+    razor.style.left = left + "px";
+    razor.style.top = top + "px";
+  }
+  positionRazor();
+  window.addEventListener("resize", positionRazor);
+
+  var ulinePath = document.getElementById("ulinePath");
+  var ulen = ulinePath.getTotalLength();
+  ulinePath.style.strokeDasharray = ulen;
+  ulinePath.style.strokeDashoffset = ulen;
+
+  var bladeGroup = document.getElementById("bladeGroup");
+  var flipCard = document.getElementById("flipCard");
+
+  function buildTimeline(){
+    var tl = gsap.timeline({ paused:true });
+
+    if (reduced){
+      tl.set(chunks, { opacity:1, y:0, x:0, rotation:0 })
+        .set("#razorEl", { opacity:1, scale:1, y:0 })
+        .set(".sub", { opacity:1, letterSpacing:"14px" })
+        .set(ulinePath, { strokeDashoffset:0 })
+        .set(bladeGroup, { rotation:0 })
+        .set([".caption",".replay"], { opacity:1 })
+        .to({}, { duration:1.4 })
+        .to(flipCard, { rotationY:180, duration:.8, ease:"power2.inOut" });
+      return tl;
+    }
+
+    tl.set(chunks, { opacity:0 })
+      .set("#razorEl", { opacity:0, scale:.3, y:-70 })
+      .set(".sub", { opacity:0, letterSpacing:"34px" })
+      .set(ulinePath, { strokeDashoffset:ulen })
+      .set(bladeGroup, { rotation:0, transformOrigin:"41px 118px" })
+      .set([".caption",".replay"], { opacity:0 })
+      .set(flipCard, { rotationY:0 });
+
+    // three type-blocks slam into place from alternating directions
+    tl.fromTo(chunks[0],
+        { opacity:0, x:-160, y:-14, rotation:-9, scale:.85 },
+        { opacity:1, x:0, y:0, rotation:0, scale:1, duration:.55, ease:"back.out(1.8)" },
+        0.15)
+      .fromTo(chunks[1],
+        { opacity:0, y:-90, rotation:12, scale:.7 },
+        { opacity:1, y:0, rotation:0, scale:1, duration:.5, ease:"back.out(2.2)" },
+        0.42)
+      .fromTo("#razorEl",
+        { opacity:0, scale:.3, y:-80, rotation:-30 },
+        { opacity:1, scale:1, y:0, rotation:0, duration:.48, ease:"back.out(2.4)" },
+        0.58)
+      .fromTo(chunks[2],
+        { opacity:0, x:160, y:-14, rotation:9, scale:.85 },
+        { opacity:1, x:0, y:0, rotation:0, scale:1, duration:.55, ease:"back.out(1.8)" },
+        0.72)
+
+      .to(".sub", { opacity:1, letterSpacing:"14px", duration:.5, ease:"power2.out" }, 1.35)
+      .to(ulinePath, { strokeDashoffset:0, duration:.55, ease:"power2.out" }, 1.45)
+
+      .to(bladeGroup, { rotation:-98, duration:.12, ease:"power2.in" }, 2.25)
+      .to(bladeGroup, { rotation:0,   duration:.14, ease:"back.out(2.2)" }, 2.39)
+      .to(bladeGroup, { rotation:-98, duration:.11, ease:"power2.in" }, 2.62)
+      .to(bladeGroup, { rotation:0,   duration:.16, ease:"back.out(1.8)" }, 2.75)
+
+      .to([".caption",".replay"], { opacity:1, duration:.6 }, 3.2)
+      .to({}, { duration:.7 })
+      .to(flipCard, { rotationY:180, duration:.9, ease:"power2.inOut" });
+
+    return tl;
+  }
+
+  var tl = buildTimeline();
+  tl.play();
+
+  document.getElementById("replayBtn").addEventListener("click", function(){
+    tl.kill();
+    gsap.set(flipCard, { rotationY:0 });
+    positionRazor();
+    tl = buildTimeline();
+    tl.play(0);
+  });
+})();
+</script>
