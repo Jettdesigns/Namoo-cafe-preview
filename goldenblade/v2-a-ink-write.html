@@ -250,17 +250,27 @@
   }
 
   var tl = null;
+  var started = false;
 
   function start(){
     positionRazor();
     document.documentElement.classList.add("fonts-ready");
+    if (started) return;
+    started = true;
     tl = buildTimeline();
     tl.play();
   }
 
-  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-  var safetyTimeout = new Promise(function(resolve){ setTimeout(resolve, 1500); });
-  Promise.race([fontsReady, safetyTimeout]).then(start);
+  // Primary path: wait for the real webfont to finish loading (network can
+  // easily take longer than a short guessed timeout, especially cold/uncached),
+  // then measure + start with correct metrics.
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(start);
+  }
+  // Fallback only: if fonts.ready never resolves for some reason, don't leave
+  // the page frozen forever — start anyway. If fonts.ready *does* still fire
+  // after this, positionRazor() runs again above and self-corrects on the fly.
+  setTimeout(start, 8000);
 
   document.getElementById("replayBtn").addEventListener("click", function(){
     if (!tl) return;
