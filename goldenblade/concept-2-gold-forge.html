@@ -1,0 +1,276 @@
+<!doctype html>
+<title>Gold Leaf Forge</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #0A0806;
+    --ink-2:      #1B120A;
+    --ink-3:      #2A1B0C;
+    --gold:       #C9A24B;
+    --gold-bright:#F1D488;
+    --gold-deep:  #7A5A22;
+    --paper:      #EFE7D8;
+    --ember:      #E8863A;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    width:100vw; height:100vh;
+    overflow:hidden;
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .stage{
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at 50% 62%, var(--ink-3) 0%, var(--ink-2) 40%, var(--ink) 80%);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  canvas{ position:absolute; inset:0; width:100%; height:100%; }
+
+  .emblem-wrap{
+    position:relative;
+    width:min(58vmin, 460px);
+    aspect-ratio:1/1;
+    z-index:2;
+  }
+  .emblem-wrap svg{ width:100%; height:100%; overflow:visible; }
+
+  .fill-clip{ transform: translateY(100%); }
+
+  .ring{ fill:none; stroke:url(#goldGrad); opacity:0; }
+  .ring-outer{ stroke-width:2.5; filter:drop-shadow(0 0 6px rgba(241,212,136,.35)); }
+  .ring-inner{ stroke-width:1; opacity:0; }
+  .tick{ stroke:var(--gold); stroke-width:1.4; opacity:0; transform-origin:230px 230px; }
+
+  .arc-text{
+    font-family:'Cinzel',serif; font-weight:600; font-size:27px; letter-spacing:6px;
+    fill:url(#goldGradSoft); opacity:0;
+  }
+  .razor-blade{ fill:var(--ink); }
+  .razor-handle{ fill:var(--ink); }
+  .razor-pivot{ fill:var(--ink); }
+
+  .line-primary{
+    font-family:'Cinzel',serif; font-weight:600; font-size:20px; letter-spacing:7px;
+    fill:var(--paper); text-anchor:middle; opacity:0;
+  }
+  .line-secondary{
+    font-family:'Jost',sans-serif; font-weight:500; font-size:11px; letter-spacing:4px;
+    fill:var(--gold); text-anchor:middle; opacity:0;
+  }
+  .diamond{ fill:url(#goldGrad); opacity:0; }
+
+  .caption{ position:fixed; left:28px; bottom:26px; z-index:20; opacity:0; }
+  .caption .kicker{ font-family:'Jost'; font-size:11px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; }
+  .caption .title{ font-family:'Cinzel'; font-size:15px; letter-spacing:1.5px; color:var(--paper); margin-top:4px; }
+
+  .replay{
+    position:fixed; right:28px; bottom:26px; z-index:20;
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid rgba(201,162,75,.55);
+    color:var(--gold-bright); font-family:'Jost'; font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; padding:10px 16px; border-radius:2px;
+    cursor:pointer; opacity:0; transition:background .2s, color .2s;
+  }
+  .replay:hover{ background:var(--gold); color:var(--ink); }
+  .replay:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    canvas{ display:none; }
+  }
+</style>
+
+<div class="stage" id="stage">
+  <canvas id="embers"></canvas>
+
+  <div class="emblem-wrap">
+    <svg viewBox="0 0 460 460" aria-labelledby="emblemTitle">
+      <title id="emblemTitle">GoldenBlade GC Barbershop crest</title>
+      <defs>
+        <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%"  stop-color="#8A6423"/>
+          <stop offset="24%" stop-color="#D9B565"/>
+          <stop offset="48%" stop-color="#FBE7A8"/>
+          <stop offset="72%" stop-color="#C9A24B"/>
+          <stop offset="100%" stop-color="#7A5A22"/>
+        </linearGradient>
+        <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="#B8933F"/>
+          <stop offset="50%" stop-color="#F1D488"/>
+          <stop offset="100%" stop-color="#B8933F"/>
+        </linearGradient>
+        <clipPath id="pourClip">
+          <rect id="pourRect" x="-20" y="460" width="500" height="600"/>
+        </clipPath>
+      </defs>
+
+      <!-- solid molten-gold silhouette, revealed by a rising clip (the "pour") -->
+      <g id="pourGroup" clip-path="url(#pourClip)">
+        <circle cx="230" cy="230" r="210" fill="none" stroke="url(#goldGrad)" stroke-width="10"/>
+        <circle cx="230" cy="230" r="168" fill="none" stroke="url(#goldGrad)" stroke-width="4"/>
+        <g transform="translate(230,205) rotate(-28)">
+          <polygon points="-6,-9 -70,-3 -94,0 -70,3 -6,9" fill="url(#goldGrad)"/>
+          <rect x="6" y="-5" width="80" height="10" rx="5" fill="url(#goldGrad)"/>
+          <circle cx="0" cy="0" r="6" fill="url(#goldGrad)"/>
+        </g>
+      </g>
+
+      <g id="ticks"></g>
+      <circle class="ring ring-outer" cx="230" cy="230" r="210"/>
+      <circle class="ring ring-inner" cx="230" cy="230" r="168"/>
+
+      <path id="topArc" d="M 48 230 A 182 182 0 0 1 412 230" fill="none"/>
+      <text class="arc-text" id="arcText">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">GOLDEN BLADE</textPath>
+      </text>
+
+      <g class="razor" id="razor" transform="translate(230,205) rotate(-28)" opacity="0">
+        <polygon class="razor-blade" points="-6,-9 -70,-3 -94,0 -70,3 -6,9" fill="none" stroke="url(#goldGrad)" stroke-width="1.2"/>
+        <rect class="razor-handle" x="6" y="-5" width="80" height="10" rx="5" fill="none" stroke="url(#goldGrad)" stroke-width="1.2"/>
+        <circle class="razor-pivot" cx="0" cy="0" r="6" fill="none" stroke="var(--gold-bright)" stroke-width="1.2"/>
+      </g>
+
+      <polygon class="diamond" id="dLeft"  points="150,296 156,302 150,308 144,302"/>
+      <text class="line-primary" id="line1" x="230" y="308">BARBERSHOP</text>
+      <polygon class="diamond" id="dRight" points="310,296 316,302 310,308 304,302"/>
+
+      <text class="line-secondary" id="line2" x="230" y="334">SURFERS PARADISE &middot; GC</text>
+    </svg>
+  </div>
+</div>
+
+<div class="caption">
+  <div class="kicker">Concept 02</div>
+  <div class="title">Gold Leaf Forge</div>
+</div>
+<button class="replay" id="replayBtn" type="button">&#8635; Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var svgNS = "http://www.w3.org/2000/svg";
+  var ticks = document.getElementById("ticks");
+  var CX = 230, CY = 230, R_IN = 196, R_OUT = 204, COUNT = 48;
+  for (var i = 0; i < COUNT; i++){
+    var a = (i / COUNT) * Math.PI * 2;
+    var line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", CX + R_IN  * Math.cos(a));
+    line.setAttribute("y1", CY + R_IN  * Math.sin(a));
+    line.setAttribute("x2", CX + R_OUT * Math.cos(a));
+    line.setAttribute("y2", CY + R_OUT * Math.sin(a));
+    line.setAttribute("class", "tick");
+    ticks.appendChild(line);
+  }
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- ember particle field (ambient, canvas 2D) ---- */
+  var canvas = document.getElementById("embers");
+  var ctx = canvas.getContext("2d");
+  var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var particles = [];
+  var PCOUNT = reduced ? 0 : 70;
+  var running = true;
+
+  function resize(){
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function spawn(p){
+    p.x = Math.random() * W;
+    p.y = H + Math.random() * 60;
+    p.r = 0.6 + Math.random() * 1.8;
+    p.vy = 0.35 + Math.random() * 0.9;
+    p.vx = (Math.random() - 0.5) * 0.4;
+    p.life = 0;
+    p.maxLife = 220 + Math.random() * 260;
+    p.hue = Math.random() < 0.5 ? "241,212,136" : "232,134,58";
+    p.alpha = 0.15 + Math.random() * 0.5;
+  }
+  for (var j = 0; j < PCOUNT; j++){ var p = {}; spawn(p); p.y = Math.random() * H; particles.push(p); }
+
+  function tick(){
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    for (var k = 0; k < particles.length; k++){
+      var pt = particles[k];
+      pt.x += pt.vx; pt.y -= pt.vy; pt.life++;
+      var fade = 1 - pt.life / pt.maxLife;
+      if (fade <= 0 || pt.y < -20){ spawn(pt); continue; }
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(" + pt.hue + "," + (pt.alpha * fade) + ")";
+      ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  if (!reduced) requestAnimationFrame(tick);
+
+  /* ---- reveal timeline ---- */
+  function setCircle(sel, r){
+    var el = document.querySelector(sel);
+    var c = 2 * Math.PI * r;
+    el.style.strokeDasharray = c;
+    el.style.strokeDashoffset = c;
+  }
+  var tickEls = ticks.querySelectorAll(".tick");
+  var pourRect = document.getElementById("pourRect");
+
+  function buildTimeline(){
+    var tl = gsap.timeline({ paused:true });
+
+    if (reduced){
+      tl.set("#pourRect", { attr:{ y:0 } })
+        .set([".ring-outer",".ring-inner","#arcText","#razor","#line1","#line2","#dLeft","#dRight",".caption",".replay"], { opacity:1 });
+      return tl;
+    }
+
+    setCircle(".ring-outer", 210);
+    setCircle(".ring-inner", 168);
+
+    tl.set("#pourRect", { attr:{ y:460 } })
+      .set([".ring-outer",".ring-inner","#arcText","#razor","#line1","#line2","#dLeft","#dRight",".caption",".replay"], { opacity:0 })
+      .set(tickEls, { opacity:0, scale:0 })
+      .set(".ring-outer, .ring-inner", { strokeDashoffset: function(i, target){ return target.style.strokeDasharray; } });
+
+    tl.to("#pourRect", { attr:{ y:-10 }, duration:1.5, ease:"power2.inOut" }, 0.1)
+      .to("#pourRect", { attr:{ y:-40 }, duration:.22, ease:"power1.out" }, 1.55)
+      .to("#pourRect", { attr:{ y:-10 }, duration:.3,  ease:"back.out(3)" }, 1.77)
+
+      .to(".ring-outer, .ring-inner", { opacity:1, duration:.3 }, 1.9)
+      .to(".ring-outer", { strokeDashoffset:0, duration:.9, ease:"power2.out" }, 1.9)
+      .to(".ring-inner", { strokeDashoffset:0, duration:.9, ease:"power2.out" }, 1.95)
+      .to(tickEls, { opacity:1, scale:1, duration:.35, ease:"back.out(2)", stagger:{ each:0.008 } }, 2.1)
+      .to("#arcText", { opacity:1, duration:.5 }, 2.2)
+      .to("#razor", { opacity:1, duration:.5 }, 2.3)
+
+      .to(["#dLeft","#dRight"], { opacity:1, duration:.35, stagger:.08 }, 2.5)
+      .to("#line1", { opacity:1, y:"-=6", duration:.45 }, 2.55)
+      .to("#line2", { opacity:1, y:"-=6", duration:.45 }, 2.7)
+      .to(".caption, .replay", { opacity:1, duration:.6 }, 2.95);
+
+    return tl;
+  }
+
+  var tl = buildTimeline();
+  tl.play();
+
+  document.getElementById("replayBtn").addEventListener("click", function(){
+    tl.kill();
+    tl = buildTimeline();
+    tl.play(0);
+  });
+})();
+</script>

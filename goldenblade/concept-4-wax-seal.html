@@ -1,0 +1,251 @@
+<!doctype html>
+<title>The Wax Seal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #0A0806;
+    --ink-2:      #16110B;
+    --ink-3:      #221A10;
+    --gold:       #C9A24B;
+    --gold-bright:#F1D488;
+    --gold-deep:  #7A5A22;
+    --paper:      #EFE7D8;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    width:100vw; height:100vh;
+    overflow:hidden;
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .stage{
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at 50% 52%, var(--ink-3) 0%, var(--ink-2) 42%, var(--ink) 80%);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .impact-flash{
+    position:absolute; width:min(58vmin,460px); aspect-ratio:1/1;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(241,212,136,.9) 0%, rgba(201,162,75,.35) 40%, transparent 72%);
+    opacity:0; pointer-events:none;
+  }
+
+  .shockwave{
+    position:absolute; width:min(58vmin,460px); aspect-ratio:1/1;
+    border-radius:50%; border:1.5px solid var(--gold-bright);
+    opacity:0; pointer-events:none;
+  }
+
+  .dust{ position:absolute; inset:0; pointer-events:none; }
+  .dust span{
+    position:absolute; left:50%; top:50%; width:4px; height:4px; border-radius:50%;
+    background:var(--gold-bright); opacity:0;
+  }
+
+  .emblem-wrap{
+    position:relative;
+    width:min(58vmin, 460px);
+    aspect-ratio:1/1;
+    z-index:2;
+    opacity:0;
+  }
+  .emblem-wrap svg{ width:100%; height:100%; overflow:visible; }
+
+  .ring{ fill:none; stroke:url(#goldGrad); }
+  .ring-outer{ stroke-width:2.5; filter:drop-shadow(0 0 6px rgba(241,212,136,.3)); }
+  .ring-inner{ stroke-width:1; opacity:.8; }
+  .tick{ stroke:var(--gold); stroke-width:1.4; transform-origin:230px 230px; }
+
+  .arc-text{
+    font-family:'Cinzel',serif; font-weight:600; font-size:27px; letter-spacing:6px;
+    fill:url(#goldGradSoft);
+  }
+  .razor-blade{ fill:url(#goldGrad); }
+  .razor-handle{ fill:var(--gold-deep); stroke:url(#goldGrad); stroke-width:1; }
+  .razor-pivot{ fill:var(--ink); stroke:var(--gold-bright); stroke-width:1.5; }
+
+  .line-primary{
+    font-family:'Cinzel',serif; font-weight:600; font-size:20px; letter-spacing:7px;
+    fill:var(--paper); text-anchor:middle;
+  }
+  .line-secondary{
+    font-family:'Jost',sans-serif; font-weight:500; font-size:11px; letter-spacing:4px;
+    fill:var(--gold); text-anchor:middle; opacity:0;
+  }
+  .diamond{ fill:url(#goldGrad); }
+
+  .caption{ position:fixed; left:28px; bottom:26px; z-index:20; opacity:0; }
+  .caption .kicker{ font-family:'Jost'; font-size:11px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; }
+  .caption .title{ font-family:'Cinzel'; font-size:15px; letter-spacing:1.5px; color:var(--paper); margin-top:4px; }
+
+  .replay{
+    position:fixed; right:28px; bottom:26px; z-index:20;
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid rgba(201,162,75,.55);
+    color:var(--gold-bright); font-family:'Jost'; font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; padding:10px 16px; border-radius:2px;
+    cursor:pointer; opacity:0; transition:background .2s, color .2s;
+  }
+  .replay:hover{ background:var(--gold); color:var(--ink); }
+  .replay:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .impact-flash, .shockwave, .dust{ display:none; }
+  }
+</style>
+
+<div class="stage" id="stage">
+  <div class="impact-flash" id="flash"></div>
+  <div class="shockwave" id="wave"></div>
+  <div class="dust" id="dust"></div>
+
+  <div class="emblem-wrap" id="emblemWrap">
+    <svg viewBox="0 0 460 460" aria-labelledby="emblemTitle">
+      <title id="emblemTitle">GoldenBlade GC Barbershop crest</title>
+      <defs>
+        <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%"  stop-color="#8A6423"/>
+          <stop offset="24%" stop-color="#D9B565"/>
+          <stop offset="48%" stop-color="#FBE7A8"/>
+          <stop offset="72%" stop-color="#C9A24B"/>
+          <stop offset="100%" stop-color="#7A5A22"/>
+        </linearGradient>
+        <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="#B8933F"/>
+          <stop offset="50%" stop-color="#F1D488"/>
+          <stop offset="100%" stop-color="#B8933F"/>
+        </linearGradient>
+      </defs>
+
+      <g id="ticks"></g>
+      <circle class="ring ring-outer" cx="230" cy="230" r="210"/>
+      <circle class="ring ring-inner" cx="230" cy="230" r="168"/>
+
+      <path id="topArc" d="M 48 230 A 182 182 0 0 1 412 230" fill="none"/>
+      <text class="arc-text" id="arcText">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">GOLDEN BLADE</textPath>
+      </text>
+
+      <g class="razor" id="razor" transform="translate(230,205) rotate(-28)">
+        <polygon class="razor-blade" points="-6,-9 -70,-3 -94,0 -70,3 -6,9"/>
+        <rect class="razor-handle" x="6" y="-5" width="80" height="10" rx="5"/>
+        <circle class="razor-pivot" cx="0" cy="0" r="6"/>
+      </g>
+
+      <polygon class="diamond" id="dLeft"  points="150,296 156,302 150,308 144,302"/>
+      <text class="line-primary" id="line1" x="230" y="308">BARBERSHOP</text>
+      <polygon class="diamond" id="dRight" points="310,296 316,302 310,308 304,302"/>
+
+      <text class="line-secondary" id="line2" x="230" y="334">SURFERS PARADISE &middot; GC</text>
+    </svg>
+  </div>
+</div>
+
+<div class="caption">
+  <div class="kicker">Concept 04</div>
+  <div class="title">The Wax Seal</div>
+</div>
+<button class="replay" id="replayBtn" type="button">&#8635; Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var svgNS = "http://www.w3.org/2000/svg";
+  var ticks = document.getElementById("ticks");
+  var CX = 230, CY = 230, R_IN = 196, R_OUT = 204, COUNT = 48;
+  for (var i = 0; i < COUNT; i++){
+    var a = (i / COUNT) * Math.PI * 2;
+    var line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", CX + R_IN  * Math.cos(a));
+    line.setAttribute("y1", CY + R_IN  * Math.sin(a));
+    line.setAttribute("x2", CX + R_OUT * Math.cos(a));
+    line.setAttribute("y2", CY + R_OUT * Math.sin(a));
+    line.setAttribute("class", "tick");
+    ticks.appendChild(line);
+  }
+
+  var dustHost = document.getElementById("dust");
+  var DCOUNT = 26;
+  var dustEls = [];
+  for (var d = 0; d < DCOUNT; d++){
+    var s = document.createElement("span");
+    dustHost.appendChild(s);
+    dustEls.push(s);
+  }
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function buildTimeline(){
+    var tl = gsap.timeline({ paused:true });
+
+    if (reduced){
+      tl.set("#emblemWrap", { opacity:1 })
+        .set("#line2", { opacity:1 })
+        .set([".caption",".replay"], { opacity:1 });
+      return tl;
+    }
+
+    tl.set("#emblemWrap", { opacity:0, y:"-70vh", scale:1.16, rotate:-9 })
+      .set("#stage", { x:0, y:0 })
+      .set("#flash", { opacity:0, scale:.6 })
+      .set("#wave", { opacity:0, scale:.6 })
+      .set(dustEls, { opacity:0, x:0, y:0 });
+
+    tl.to("#emblemWrap", { opacity:1, duration:.01 }, 0.05)
+      .to("#emblemWrap", { y:0, scale:1, rotate:0, duration:.62, ease:"power2.in" }, 0.05)
+
+      // impact
+      .to("#emblemWrap", { scaleY:.92, scaleX:1.05, duration:.09, ease:"power1.out" }, 0.66)
+      .to("#emblemWrap", { scaleY:1, scaleX:1, duration:.38, ease:"elastic.out(1,0.5)" }, 0.75)
+
+      .to("#flash", { opacity:.9, scale:1.05, duration:.1, ease:"power1.out" }, 0.66)
+      .to("#flash", { opacity:0, scale:1.3, duration:.5, ease:"power2.out" }, 0.76)
+
+      .to("#wave", { opacity:.8, scale:.65, duration:.01 }, 0.66)
+      .to("#wave", { opacity:0, scale:1.9, duration:.65, ease:"power2.out" }, 0.66)
+
+      .to(dustEls, {
+        opacity:.8, duration:.12,
+        x:function(){ return (Math.random()-0.5) * 340; },
+        y:function(){ return (Math.random()-0.5) * 340 - 40; },
+        stagger:{ each:0.003, from:"center" }
+      }, 0.68)
+      .to(dustEls, { opacity:0, y:"+=60", duration:.7, ease:"power1.in" }, 0.85)
+
+      .to("#stage", { x:3, duration:.045, repeat:5, yoyo:true }, 0.66)
+
+      .fromTo("#line2", { opacity:0, y:6 }, { opacity:1, y:0, duration:.5, ease:"power2.out" }, 1.15)
+      .to(".caption, .replay", { opacity:1, duration:.6 }, 1.4);
+
+    return tl;
+  }
+
+  var tl = buildTimeline();
+  tl.play();
+
+  var breathe;
+  function ambientBreathe(){
+    if (reduced) return;
+    breathe = gsap.to(".ring-outer", { opacity:.7, duration:2.6, ease:"sine.inOut", repeat:-1, yoyo:true, delay:1.9 });
+  }
+  ambientBreathe();
+
+  document.getElementById("replayBtn").addEventListener("click", function(){
+    if (breathe) breathe.kill();
+    gsap.set(".ring-outer", { opacity:1 });
+    tl.kill();
+    tl = buildTimeline();
+    tl.play(0);
+    ambientBreathe();
+  });
+})();
+</script>

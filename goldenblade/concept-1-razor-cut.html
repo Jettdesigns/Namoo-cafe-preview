@@ -1,0 +1,278 @@
+<!doctype html>
+<title>The Straight-Razor Cut</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #0A0806;
+    --ink-2:      #16110B;
+    --ink-3:      #221A10;
+    --gold:       #C9A24B;
+    --gold-bright:#F1D488;
+    --gold-deep:  #7A5A22;
+    --paper:      #EFE7D8;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    width:100vw; height:100vh;
+    overflow:hidden;
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .stage{
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 42%, var(--ink-3) 0%, var(--ink-2) 38%, var(--ink) 78%);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* -------- emblem -------- */
+  .emblem-wrap{
+    position:relative;
+    width:min(58vmin, 460px);
+    aspect-ratio:1/1;
+    z-index:2;
+  }
+  .emblem-wrap svg{ width:100%; height:100%; overflow:visible; }
+
+  .ring{ fill:none; stroke:url(#goldGrad); }
+  .ring-outer{ stroke-width:2.5; filter:drop-shadow(0 0 6px rgba(241,212,136,.35)); }
+  .ring-inner{ stroke-width:1; opacity:.8; }
+  .tick{ stroke:var(--gold); stroke-width:1.4; opacity:0; transform-origin:230px 230px; }
+
+  .arc-text{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:27px;
+    letter-spacing:6px;
+    fill:url(#goldGradSoft);
+    opacity:0;
+  }
+  .razor{ opacity:0; transform-origin:230px 205px; }
+  .razor-blade{ fill:url(#goldGrad); filter:drop-shadow(0 1px 2px rgba(0,0,0,.5)); }
+  .razor-handle{ fill:var(--gold-deep); stroke:url(#goldGrad); stroke-width:1; }
+  .razor-pivot{ fill:var(--ink); stroke:var(--gold-bright); stroke-width:1.5; }
+
+  .line-primary{
+    font-family:'Cinzel',serif; font-weight:600;
+    font-size:20px; letter-spacing:7px; fill:var(--paper);
+    text-anchor:middle; opacity:0;
+  }
+  .line-secondary{
+    font-family:'Jost',sans-serif; font-weight:500;
+    font-size:11px; letter-spacing:4px; fill:var(--gold);
+    text-anchor:middle; opacity:0;
+  }
+  .diamond{ fill:url(#goldGrad); opacity:0; }
+
+  .sheen{
+    position:absolute; inset:-10%;
+    background:linear-gradient(115deg, transparent 42%, rgba(241,212,136,.16) 50%, transparent 58%);
+    mix-blend-mode:screen;
+    transform:translateX(-60%);
+    pointer-events:none;
+  }
+
+  /* -------- cut panels -------- */
+  .cut-panel{
+    position:absolute; top:-6vh; bottom:-6vh;
+    width:51vw;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.02) 0 2px, transparent 2px 26px),
+      linear-gradient(180deg, var(--ink-2), var(--ink));
+    z-index:5;
+  }
+  .cut-panel.left{  left:-1vw; border-right:1px solid rgba(201,162,75,.35); box-shadow:6px 0 24px rgba(0,0,0,.55); }
+  .cut-panel.right{ right:-1vw; border-left:1px solid rgba(201,162,75,.35); box-shadow:-6px 0 24px rgba(0,0,0,.55); }
+
+  .blade-edge{
+    position:absolute; left:50%; top:50%;
+    width:150vmax; height:3px;
+    background:linear-gradient(90deg, transparent 0%, var(--gold-bright) 12%, #fff 50%, var(--gold-bright) 88%, transparent 100%);
+    box-shadow:0 0 18px 3px rgba(241,212,136,.85), 0 0 46px 10px rgba(201,162,75,.4);
+    transform:translate(-50%,-50%) rotate(-13deg) translateX(-150%);
+    z-index:6;
+    opacity:0;
+  }
+
+  .flash{
+    position:fixed; inset:0; background:var(--gold-bright);
+    opacity:0; z-index:7; pointer-events:none; mix-blend-mode:screen;
+  }
+
+  /* -------- chrome -------- */
+  .caption{
+    position:fixed; left:28px; bottom:26px; z-index:20;
+    opacity:0;
+  }
+  .caption .kicker{ font-family:'Jost'; font-size:11px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; }
+  .caption .title{ font-family:'Cinzel'; font-size:15px; letter-spacing:1.5px; color:var(--paper); margin-top:4px; }
+
+  .replay{
+    position:fixed; right:28px; bottom:26px; z-index:20;
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid rgba(201,162,75,.55);
+    color:var(--gold-bright); font-family:'Jost'; font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; padding:10px 16px; border-radius:2px;
+    cursor:pointer; opacity:0; transition:background .2s, color .2s;
+  }
+  .replay:hover{ background:var(--gold); color:var(--ink); }
+  .replay:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .cut-panel, .blade-edge, .flash{ display:none; }
+  }
+</style>
+
+<div class="stage" id="stage">
+  <div class="emblem-wrap">
+    <div class="sheen" id="sheen"></div>
+    <svg viewBox="0 0 460 460" aria-labelledby="emblemTitle">
+      <title id="emblemTitle">GoldenBlade GC Barbershop crest</title>
+      <defs>
+        <path id="topArc" d="M 48 230 A 182 182 0 0 1 412 230" fill="none"/>
+        <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%"  stop-color="#8A6423"/>
+          <stop offset="24%" stop-color="#D9B565"/>
+          <stop offset="48%" stop-color="#FBE7A8"/>
+          <stop offset="72%" stop-color="#C9A24B"/>
+          <stop offset="100%" stop-color="#7A5A22"/>
+        </linearGradient>
+        <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="#B8933F"/>
+          <stop offset="50%" stop-color="#F1D488"/>
+          <stop offset="100%" stop-color="#B8933F"/>
+        </linearGradient>
+      </defs>
+
+      <g id="ticks"></g>
+      <circle class="ring ring-outer" cx="230" cy="230" r="210"/>
+      <circle class="ring ring-inner" cx="230" cy="230" r="168"/>
+
+      <text class="arc-text" id="arcText">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">GOLDEN BLADE</textPath>
+      </text>
+
+      <g class="razor" id="razor" transform="translate(230,205) rotate(-28)">
+        <polygon class="razor-blade" points="-6,-9 -70,-3 -94,0 -70,3 -6,9"/>
+        <rect class="razor-handle" x="6" y="-5" width="80" height="10" rx="5"/>
+        <circle class="razor-pivot" cx="0" cy="0" r="6"/>
+      </g>
+
+      <polygon class="diamond" id="dLeft"  points="150,296 156,302 150,308 144,302"/>
+      <text class="line-primary" id="line1" x="230" y="308">BARBERSHOP</text>
+      <polygon class="diamond" id="dRight" points="310,296 316,302 310,308 304,302"/>
+
+      <text class="line-secondary" id="line2" x="230" y="334">SURFERS PARADISE &middot; GC</text>
+    </svg>
+  </div>
+
+  <div class="blade-edge" id="blade"></div>
+  <div class="cut-panel left"  id="panelL"></div>
+  <div class="cut-panel right" id="panelR"></div>
+  <div class="flash" id="flash"></div>
+</div>
+
+<div class="caption">
+  <div class="kicker">Concept 01</div>
+  <div class="title">The Straight-Razor Cut</div>
+</div>
+<button class="replay" id="replayBtn" type="button">&#8635; Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var svgNS = "http://www.w3.org/2000/svg";
+  var ticks = document.getElementById("ticks");
+  var CX = 230, CY = 230, R_IN = 196, R_OUT = 204, COUNT = 48;
+  for (var i = 0; i < COUNT; i++){
+    var a = (i / COUNT) * Math.PI * 2;
+    var x1 = CX + R_IN  * Math.cos(a), y1 = CY + R_IN  * Math.sin(a);
+    var x2 = CX + R_OUT * Math.cos(a), y2 = CY + R_OUT * Math.sin(a);
+    var line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+    line.setAttribute("class", "tick");
+    ticks.appendChild(line);
+  }
+
+  function setCircle(sel, r){
+    var el = document.querySelector(sel);
+    var c = 2 * Math.PI * r;
+    el.style.strokeDasharray = c;
+    el.style.strokeDashoffset = c;
+  }
+  setCircle(".ring-outer", 210);
+  setCircle(".ring-inner", 168);
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tickEls = ticks.querySelectorAll(".tick");
+
+  function buildTimeline(){
+    var tl = gsap.timeline({ paused:true });
+
+    if (reduced){
+      tl.set([".ring-outer",".ring-inner"], { strokeDashoffset:0 })
+        .to(["#arcText","#razor","#line1","#line2","#dLeft","#dRight",".caption",".replay"], { opacity:1, duration:.5 });
+      return tl;
+    }
+
+    tl.set(["#arcText","#razor","#line1","#line2","#dLeft","#dRight",".caption",".replay"], { opacity:0 })
+      .set(tickEls, { opacity:0, scale:0 })
+      .set("#blade", { opacity:0, x:"-160%" })
+      .set(["#panelL","#panelR"], { x:0 })
+      .set("#flash", { opacity:0 })
+      .set(".ring-outer, .ring-inner", { strokeDashoffset: function(i, target){ return target.style.strokeDasharray; } });
+
+    tl.to("#blade", { opacity:1, duration:.05 }, 0.15)
+      .to("#blade", { x:"160%", duration:.5, ease:"power2.in" }, 0.15)
+      .to("#flash", { opacity:.85, duration:.06 }, 0.46)
+      .to("#flash", { opacity:0, duration:.28 }, 0.52)
+      .to("#blade", { opacity:0, duration:.1 }, 0.6)
+
+      .to("#panelL", { x:"-100%", duration:.9, ease:"power3.inOut" }, 0.5)
+      .to("#panelR", { x:"100%",  duration:.9, ease:"power3.inOut" }, 0.5)
+
+      .to(".ring-outer", { strokeDashoffset:0, duration:1.1, ease:"power2.out" }, 0.55)
+      .to(".ring-inner", { strokeDashoffset:0, duration:1.1, ease:"power2.out" }, 0.65)
+      .to(tickEls, { opacity:1, scale:1, duration:.4, ease:"back.out(2)", stagger:{ each:0.008, from:"start" } }, 0.7)
+
+      .to("#arcText", { opacity:1, duration:.6 }, 1.15)
+      .fromTo("#razor", { opacity:0, rotate:-90, scale:1.3 }, { opacity:1, rotate:-28, scale:1, duration:.7, ease:"back.out(1.7)", transformOrigin:"230px 205px" }, 1.3)
+
+      .to(["#dLeft","#dRight"], { opacity:1, duration:.35, stagger:.08 }, 1.85)
+      .to("#line1", { opacity:1, y:"-=6", duration:.45, ease:"power2.out" }, 1.9)
+      .to("#line2", { opacity:1, y:"-=6", duration:.45, ease:"power2.out" }, 2.05)
+
+      .to(".caption, .replay", { opacity:1, duration:.6 }, 2.3);
+
+    return tl;
+  }
+
+  function ambientSheen(){
+    gsap.fromTo("#sheen", { xPercent:-60 }, {
+      xPercent:60, duration:2.8, ease:"power1.inOut",
+      repeat:-1, repeatDelay:3.4
+    });
+  }
+
+  var tl = buildTimeline();
+  tl.play();
+  if (!reduced) ambientSheen();
+
+  document.getElementById("replayBtn").addEventListener("click", function(){
+    gsap.killTweensOf("#sheen");
+    tl.kill();
+    tl = buildTimeline();
+    tl.play(0);
+    if (!reduced) ambientSheen();
+  });
+})();
+</script>

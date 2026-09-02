@@ -1,0 +1,143 @@
+<!doctype html>
+<title>GoldenBlade — Opening Concepts</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #0A0806;
+    --ink-2:      #16110B;
+    --panel:      #1C1610;
+    --gold:       #C9A24B;
+    --gold-bright:#F1D488;
+    --gold-deep:  #7A5A22;
+    --paper:      #EFE7D8;
+    --paper-dim:  #B8AE9B;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:72px 28px 64px; }
+
+  header{ margin-bottom:56px; }
+  .eyebrow{
+    font-size:11px; letter-spacing:4px; color:var(--gold);
+    text-transform:uppercase; margin:0 0 14px;
+  }
+  h1{
+    font-family:'Cinzel', serif; font-weight:600;
+    font-size:clamp(28px, 4vw, 44px); letter-spacing:1px;
+    margin:0 0 16px; text-wrap:balance;
+  }
+  header p{
+    max-width:62ch; color:var(--paper-dim); font-size:16px; line-height:1.65; margin:0;
+  }
+
+  .grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:22px;
+  }
+  @media (max-width:760px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:linear-gradient(165deg, var(--panel), var(--ink-2));
+    border:1px solid rgba(201,162,75,.22);
+    border-radius:4px;
+    padding:26px 26px 24px;
+    display:flex; flex-direction:column; gap:14px;
+    text-decoration:none; color:inherit;
+    transition:border-color .2s, transform .2s;
+  }
+  .card:hover{ border-color:rgba(201,162,75,.6); transform:translateY(-2px); }
+  .card:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; }
+
+  .card-top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+  .num{ font-family:'Jost'; font-size:11px; letter-spacing:3px; color:var(--gold); }
+  .mood{
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--paper-dim); border:1px solid rgba(239,231,216,.25);
+    padding:3px 9px; border-radius:20px; white-space:nowrap;
+  }
+
+  .card h2{
+    font-family:'Cinzel', serif; font-weight:600; font-size:22px;
+    margin:0; letter-spacing:.5px;
+  }
+  .card p{
+    margin:0; color:var(--paper-dim); font-size:14.5px; line-height:1.6;
+    flex:1;
+  }
+
+  .open{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold-bright); margin-top:4px;
+  }
+  .open .arrow{ transition:transform .2s; }
+  .card:hover .open .arrow{ transform:translateX(4px); }
+
+  footer{
+    margin-top:56px; padding-top:24px; border-top:1px solid rgba(201,162,75,.18);
+    font-size:13px; color:var(--paper-dim); line-height:1.7;
+  }
+  footer strong{ color:var(--paper); }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">GoldenBlade GC Barbershop &middot; Surfers Paradise</p>
+    <h1>Four opening-animation directions</h1>
+    <p>
+      Each concept builds the same gold-and-black crest — arced wordmark, straight-razor
+      mark, engraved rim — but earns it through a different piece of choreography. Open
+      each full-screen and use Replay to run it again; all four are silent, load in
+      under a second, and hold a clean resting frame once settled.
+    </p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="https://claude.ai/code/artifact/e341d717-9287-4e58-bfa5-182826ed4f86" target="_blank" rel="noopener">
+      <div class="card-top"><span class="num">CONCEPT 01</span><span class="mood">Sharp &middot; Cinematic</span></div>
+      <h2>The Straight-Razor Cut</h2>
+      <p>A blade of gold light slices the screen open; the two halves peel back like fabric to reveal the crest, which settles into place with a decisive snap.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/85854f98-ebaa-467a-b17e-7e9df122c2dc" target="_blank" rel="noopener">
+      <div class="card-top"><span class="num">CONCEPT 02</span><span class="mood">Organic &middot; Warm</span></div>
+      <h2>Gold Leaf Forge</h2>
+      <p>Embers drift upward from the dark and molten gold pours in from below, filling the crest like metal finding its mould. The warmest, most tactile of the four.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/b231d9ad-a652-483b-ad5c-16c810d9b78d" target="_blank" rel="noopener">
+      <div class="card-top"><span class="num">CONCEPT 03</span><span class="mood">Retro &middot; Local</span></div>
+      <h2>Cavill Ave Marquee</h2>
+      <p>Thirty-four bulbs switch on one by one around the rim like old beachfront signage, the tube flickers to life, and the crest glows into a lit sign. The only concept grounded in the shop's own street.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/582ec7f4-85e0-47eb-af97-f6d5b34cfa2a" target="_blank" rel="noopener">
+      <div class="card-top"><span class="num">CONCEPT 04</span><span class="mood">Restrained &middot; Tactile</span></div>
+      <h2>The Wax Seal</h2>
+      <p>The finished crest drops and stamps down like a wax seal on a document — a flash, a shockwave ring, a puff of gold dust — then holds perfectly still. The quietest, most editorial option.</p>
+      <span class="open">Open animation <span class="arrow">&rarr;</span></span>
+    </a>
+  </div>
+
+  <footer>
+    <strong>A note on the mark:</strong> the crest shown here (arced "GOLDEN BLADE" wordmark,
+    engraved rim, open straight-razor icon) was built from the shop's name and confirmed
+    gold-on-black palette — I wasn't able to pull the exact logo file from Instagram or the
+    booking site over this connection. Send the logo file directly and I'll rebuild all four
+    around your real mark instead of this placeholder crest.
+  </footer>
+</div>

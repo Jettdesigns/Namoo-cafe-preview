@@ -1,0 +1,261 @@
+<!doctype html>
+<title>Cavill Ave Marquee</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:        #07070A;
+    --ink-2:      #111116;
+    --ink-3:      #1A1A22;
+    --gold:       #C9A24B;
+    --gold-bright:#F1D488;
+    --gold-deep:  #7A5A22;
+    --paper:      #EFE7D8;
+    --bulb-off:   #3A3226;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    width:100vw; height:100vh;
+    overflow:hidden;
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .stage{
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at 50% 46%, var(--ink-3) 0%, var(--ink-2) 45%, var(--ink) 82%);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .emblem-wrap{
+    position:relative;
+    width:min(58vmin, 460px);
+    aspect-ratio:1/1;
+    z-index:2;
+  }
+  .emblem-wrap svg{ width:100%; height:100%; overflow:visible; }
+
+  .ring{ fill:none; stroke:var(--bulb-off); }
+  .ring-outer{ stroke-width:1.5; }
+  .ring-inner{ stroke-width:1; opacity:.6; }
+  .tick{ stroke:var(--bulb-off); stroke-width:1.4; transform-origin:230px 230px; }
+
+  .bulb{ fill:var(--bulb-off); }
+  .bulb-glow{ fill:var(--gold-bright); opacity:0; }
+
+  .arc-text{
+    font-family:'Cinzel',serif; font-weight:600; font-size:27px; letter-spacing:6px;
+    fill:var(--bulb-off);
+  }
+  .razor-blade{ fill:var(--bulb-off); }
+  .razor-handle{ fill:var(--bulb-off); }
+  .razor-pivot{ fill:var(--ink); stroke:var(--bulb-off); stroke-width:1.5; }
+
+  .line-primary{
+    font-family:'Cinzel',serif; font-weight:600; font-size:20px; letter-spacing:7px;
+    fill:var(--bulb-off); text-anchor:middle;
+  }
+  .line-secondary{
+    font-family:'Jost',sans-serif; font-weight:500; font-size:11px; letter-spacing:4px;
+    fill:var(--bulb-off); text-anchor:middle; opacity:0;
+  }
+  .diamond{ fill:var(--bulb-off); }
+
+  .caption{ position:fixed; left:28px; bottom:26px; z-index:20; opacity:0; }
+  .caption .kicker{ font-family:'Jost'; font-size:11px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; }
+  .caption .title{ font-family:'Cinzel'; font-size:15px; letter-spacing:1.5px; color:var(--paper); margin-top:4px; }
+
+  .replay{
+    position:fixed; right:28px; bottom:26px; z-index:20;
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid rgba(201,162,75,.55);
+    color:var(--gold-bright); font-family:'Jost'; font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; padding:10px 16px; border-radius:2px;
+    cursor:pointer; opacity:0; transition:background .2s, color .2s;
+  }
+  .replay:hover{ background:var(--gold); color:var(--ink); }
+  .replay:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+</style>
+
+<div class="stage" id="stage">
+  <div class="emblem-wrap">
+    <svg viewBox="0 0 460 460" aria-labelledby="emblemTitle">
+      <title id="emblemTitle">GoldenBlade GC Barbershop crest</title>
+      <defs>
+        <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%"  stop-color="#8A6423"/>
+          <stop offset="24%" stop-color="#D9B565"/>
+          <stop offset="48%" stop-color="#FBE7A8"/>
+          <stop offset="72%" stop-color="#C9A24B"/>
+          <stop offset="100%" stop-color="#7A5A22"/>
+        </linearGradient>
+        <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="#B8933F"/>
+          <stop offset="50%" stop-color="#F1D488"/>
+          <stop offset="100%" stop-color="#B8933F"/>
+        </linearGradient>
+        <radialGradient id="bulbGlow">
+          <stop offset="0%" stop-color="#FFF3D2" stop-opacity=".95"/>
+          <stop offset="45%" stop-color="#F1D488" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="#F1D488" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <circle class="ring ring-outer" cx="230" cy="230" r="210"/>
+      <circle class="ring ring-inner" cx="230" cy="230" r="168"/>
+      <g id="ticks"></g>
+
+      <path id="topArc" d="M 48 230 A 182 182 0 0 1 412 230" fill="none"/>
+      <text class="arc-text" id="arcText">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">GOLDEN BLADE</textPath>
+      </text>
+
+      <g id="razor" transform="translate(230,205) rotate(-28)">
+        <polygon class="razor-blade" points="-6,-9 -70,-3 -94,0 -70,3 -6,9"/>
+        <rect class="razor-handle" x="6" y="-5" width="80" height="10" rx="5"/>
+        <circle class="razor-pivot" cx="0" cy="0" r="6"/>
+      </g>
+
+      <polygon class="diamond" id="dLeft"  points="150,296 156,302 150,308 144,302"/>
+      <text class="line-primary" id="line1" x="230" y="308">BARBERSHOP</text>
+      <polygon class="diamond" id="dRight" points="310,296 316,302 310,308 304,302"/>
+
+      <text class="line-secondary" id="line2" x="230" y="334">CAVILL AVE &middot; SURFERS PARADISE</text>
+
+      <g id="bulbLayer"></g>
+    </svg>
+  </div>
+</div>
+
+<div class="caption">
+  <div class="kicker">Concept 03</div>
+  <div class="title">Cavill Ave Marquee</div>
+</div>
+<button class="replay" id="replayBtn" type="button">&#8635; Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var svgNS = "http://www.w3.org/2000/svg";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var ticks = document.getElementById("ticks");
+  var CX = 230, CY = 230, R_IN = 196, R_OUT = 204, TCOUNT = 48;
+  for (var i = 0; i < TCOUNT; i++){
+    var a = (i / TCOUNT) * Math.PI * 2;
+    var line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", CX + R_IN  * Math.cos(a));
+    line.setAttribute("y1", CY + R_IN  * Math.sin(a));
+    line.setAttribute("x2", CX + R_OUT * Math.cos(a));
+    line.setAttribute("y2", CY + R_OUT * Math.sin(a));
+    line.setAttribute("class", "tick");
+    ticks.appendChild(line);
+  }
+
+  /* marquee bulbs sit exactly on the outer ring */
+  var bulbLayer = document.getElementById("bulbLayer");
+  var BCOUNT = 34, BR = 210;
+  var bulbs = [], glows = [];
+  for (var b = 0; b < BCOUNT; b++){
+    var ang = (b / BCOUNT) * Math.PI * 2 - Math.PI / 2;
+    var bx = CX + BR * Math.cos(ang), by = CY + BR * Math.sin(ang);
+    var glow = document.createElementNS(svgNS, "circle");
+    glow.setAttribute("cx", bx); glow.setAttribute("cy", by); glow.setAttribute("r", 13);
+    glow.setAttribute("fill", "url(#bulbGlow)");
+    glow.setAttribute("class", "bulb-glow");
+    bulbLayer.appendChild(glow);
+    var bulb = document.createElementNS(svgNS, "circle");
+    bulb.setAttribute("cx", bx); bulb.setAttribute("cy", by); bulb.setAttribute("r", 3.4);
+    bulb.setAttribute("class", "bulb");
+    bulbLayer.appendChild(bulb);
+    bulbs.push(bulb); glows.push(glow);
+  }
+
+  function buildTimeline(){
+    var tl = gsap.timeline({ paused:true });
+    var litFill = "url(#goldGrad)";
+    var litStroke = "url(#goldGrad)";
+
+    if (reduced){
+      tl.set(bulbs, { fill: "#F1D488" })
+        .set(glows, { opacity:.7 })
+        .set([".ring-outer",".ring-inner",".tick"], { stroke: litStroke })
+        .set("#arcText", { fill:"url(#goldGradSoft)" })
+        .set(["#razor .razor-blade","#razor .razor-handle"], { fill: litFill })
+        .set("#line1", { fill:"#EFE7D8" })
+        .set(["#line2","#dLeft","#dRight",".caption",".replay"], { opacity:1, fill:litFill });
+      return tl;
+    }
+
+    tl.to(bulbs, {
+        fill: "#FFF3D2", duration:.05,
+        stagger:{ each:0.026, from:"start" }
+      }, 0.1)
+      .to(glows, {
+        opacity:.85, duration:.18, ease:"power1.out",
+        stagger:{ each:0.026, from:"start" }
+      }, 0.1)
+      .to(glows, {
+        opacity:.5, duration:.3, ease:"power1.inOut",
+        stagger:{ each:0.026, from:"start" }
+      }, 0.35)
+
+      // tube warms up: flicker twice then hold
+      .to([".ring-outer",".ring-inner",".tick"], { stroke:litStroke, duration:.04 }, 1.15)
+      .to(["#razor .razor-blade","#razor .razor-handle"], { fill:litFill, duration:.04 }, 1.15)
+      .to(["#razor .razor-pivot"], { stroke:litStroke, duration:.04 }, 1.15)
+      .to(["#arcText"], { fill:"url(#goldGradSoft)", duration:.04 }, 1.15)
+      .to([".ring-outer",".ring-inner","#arcText","#razor"], { opacity:.15, duration:.05 }, 1.22)
+      .to([".ring-outer",".ring-inner","#arcText","#razor"], { opacity:1,  duration:.05 }, 1.28)
+      .to([".ring-outer",".ring-inner","#arcText","#razor"], { opacity:.3, duration:.05 }, 1.38)
+      .to([".ring-outer",".ring-inner","#arcText","#razor"], { opacity:1,  duration:.08 }, 1.45)
+
+      .to("#razor", { x:1, duration:.03, repeat:5, yoyo:true }, 1.5)
+
+      .fromTo("#line1", { fill:"#3A3226" }, { fill:"#EFE7D8", duration:.3 }, 1.7)
+      .to(["#dLeft","#dRight"], { fill:litFill, duration:.3 }, 1.75)
+      .to("#line2", { opacity:1, fill:litFill, y:"-=4", duration:.4 }, 1.9)
+
+      .to(".caption, .replay", { opacity:1, duration:.6 }, 2.15);
+
+    return tl;
+  }
+
+  var tl = buildTimeline();
+  tl.play();
+
+  var ambientTimers = [];
+  function ambientFlicker(){
+    if (reduced) return;
+    ambientTimers.push(setInterval(function(){
+      var idx = Math.floor(Math.random() * bulbs.length);
+      gsap.to(glows[idx], { opacity: 0.15 + Math.random() * 0.2, duration: .12, yoyo:true, repeat:1 });
+    }, 900));
+  }
+  ambientFlicker();
+
+  document.getElementById("replayBtn").addEventListener("click", function(){
+    ambientTimers.forEach(clearInterval);
+    ambientTimers = [];
+    tl.kill();
+    gsap.set(bulbs, { fill: "#3A3226" });
+    gsap.set(glows, { opacity: 0 });
+    gsap.set([".ring-outer",".ring-inner",".tick"], { stroke: "#3A3226", opacity:1 });
+    gsap.set("#arcText", { fill:"#3A3226", opacity:1 });
+    gsap.set(["#razor .razor-blade","#razor .razor-handle"], { fill:"#3A3226" });
+    gsap.set("#razor", { opacity:1 });
+    gsap.set("#line1", { fill:"#3A3226" });
+    gsap.set(["#line2","#dLeft","#dRight"], { fill:"#3A3226", opacity:0 });
+    gsap.set([".caption",".replay"], { opacity:0 });
+    tl = buildTimeline();
+    tl.play(0);
+    ambientFlicker();
+  });
+})();
+</script>
